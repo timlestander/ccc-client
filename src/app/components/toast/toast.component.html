@@ -1,0 +1,5 @@
+<div class="toast-wrapper" *ngIf="currentToast" [ngClass]="{'info': currentToast.type === 'info', 'success': currentToast.type === 'success', 'error': currentToast.type === 'error'}">
+  <div class="close" (click)="closeToast()">X</div>
+  <h3 class="title">{{ currentToast.title}}</h3>
+  <div class="message">{{ currentToast.message }}</div>
+</div>

@@ -1,0 +1,23 @@
+<div class="register-wrapper">
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit(registerForm.value)">
+    <div class="form-group">
+      <label>Användarnamn</label>
+      <input type="text" formControlName="username" />
+    </div>
+    <div class="form-group">
+      <label>Namn</label>
+      <input type="text" formControlName="name" />
+    </div>
+    <div class="form-group">
+      <label>Lösenord</label>
+      <input type="password" formControlName="password" />
+    </div>
+    <div class="form-group">
+      <label>Lösenord igen</label>
+      <input type="password" formControlName="password2" />
+    </div>
+    <input type="submit" value="Registrera in" [disabled]="!registerForm.valid" />
+  </form>
+  <p>Redan medlem? Klicka
+    <a routerLink="/login">här</a> för att logga in.</p>
+</div>
