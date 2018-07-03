@@ -38,4 +38,8 @@ export class OverviewComponent implements OnInit {
   public goToPoll(id: number): void {
     this.router.navigateByUrl(`/poll/${id}`);
   }
+
+  public goToEditUser(id: number): void {
+    this.router.navigateByUrl(`/update/${id}`);
+  }
 }
