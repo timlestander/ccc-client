@@ -1,4 +1,16 @@
-# Ccc
+# General CCC development documentations
+
+In order to have a successful trip to Split there is a need for a Croatian Crime Court app.
+
+## Getting started
+
+To get the client up and running all you need to do is to clone the repo using `git pull [repo]` followed by a `npm install` to get all dependencies. 
+
+Note: The client won't work very well without the [ccc-server](https://github.com/timlestander/ccc-server) running.
+
+To start contributing you c reate a new branch using `git checkout -b [branch-name]` and start developing. When you have a working contribution you can create a merge request and make the court even better.
+
+# Angular-cli documentation
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.5.
 
