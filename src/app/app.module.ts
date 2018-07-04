@@ -20,6 +20,7 @@ import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth.guard';
 import { ToastService } from './services/toast.service';
 import { ApiService } from './services/api.service';
+import { PollListComponent } from './components/poll-list/poll-list.component';
 
 const appRoutes: Routes = [
   {
@@ -27,7 +28,7 @@ const appRoutes: Routes = [
     component: RegisterComponent
   },
   {
-    path: 'overview',
+    path: '',
     component: OverviewComponent,
     canActivate: [AuthGuard]
   },
@@ -41,8 +42,8 @@ const appRoutes: Routes = [
     component: LoginComponent
   },
   {
-    path: 'secretpath',
-    component: RegisterComponent,
+    path: 'polls',
+    component: PollListComponent,
     canActivate: [AuthGuard]
   }
 ];
@@ -54,7 +55,8 @@ const appRoutes: Routes = [
     LoginComponent,
     OverviewComponent,
     ToastComponent,
-    PollComponent
+    PollComponent,
+    PollListComponent
   ],
   imports: [
     BrowserModule,
