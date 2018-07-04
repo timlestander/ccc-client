@@ -1,0 +1,25 @@
+.list-wrapper {
+  width: 100%;
+  h3 {
+    margin-bottom: 5px;
+  }
+  .poll-group {
+    .poll {
+      background: #fff;
+      padding: 10px 8px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      display: flex;
+
+      .question {
+        flex: 1;
+      }
+      .vote-count {
+        flex: 0;
+        border-radius: 10px;
+        padding: 0px 10px;
+        background-color: lightgreen;
+      }
+    }
+  }
+}

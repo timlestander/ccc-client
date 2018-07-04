@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
       .login(values.username, values.password)
       .subscribe((result: any) => {
         if (result.success) {
-          this.router.navigateByUrl('/overview');
+          this.router.navigateByUrl('/');
         } else {
           this.toastService.addToast('error', result.title, result.message);
         }

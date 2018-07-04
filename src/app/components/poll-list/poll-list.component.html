@@ -2,14 +2,16 @@
   <h3>ÄRENDEN ATT RÖSTA PÅ</h3>
   <div class="poll-group" *ngIf="openPolls.length > 0">
     <div class="poll" *ngFor="let poll of openPolls" (click)="goToPoll(poll.id)">
-      {{ poll.question }} - {{ poll.totalVotes }}
+      <span class="question">{{ poll.question }}</span>
+      <span class="vote-count">{{ poll.totalVotes }}</span>
     </div>
   </div>
 
   <h3>AVKLARADE ÄRENDEN</h3>
   <div class="poll-group" *ngIf="closedPolls.length > 0">
     <div class="poll" *ngFor="let poll of closedPolls" (click)="goToPoll(poll.id)">
-      {{ poll.question }} - {{ poll.totalVotes }}
+      <span class="question">{{ poll.question }}</span>
+      <span class="vote-count">{{ poll.totalVotes }}</span>
     </div>
   </div>
 </div>
