@@ -14,6 +14,7 @@ import { AppComponent } from './app.component';
 import { OverviewComponent } from './components/overview/overview.component';
 import { ToastComponent } from './components/toast/toast.component';
 import { PollComponent } from './components/poll/poll.component';
+import { CreatePollComponent } from './components/create-poll/create-poll.component';
 
 // Services
 import { AuthService } from './services/auth.service';
@@ -38,6 +39,11 @@ const appRoutes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'createpoll',
+    component: CreatePollComponent,
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'login',
     component: LoginComponent
   },
@@ -56,7 +62,8 @@ const appRoutes: Routes = [
     OverviewComponent,
     ToastComponent,
     PollComponent,
-    PollListComponent
+    PollListComponent,
+    CreatePollComponent
   ],
   imports: [
     BrowserModule,

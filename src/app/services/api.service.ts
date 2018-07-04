@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { UserInterface } from '../interfaces/user.interface';
+import { OptionInterface } from '../interfaces/option.interface';
 import { PollInterface } from '../interfaces/poll.interface';
 import { VoteInterface } from '../interfaces/vote.interface';
 
@@ -27,5 +28,13 @@ export class ApiService {
 
   public submitVote(vote: VoteInterface): Observable<any> {
     return this.http.post(`${this.BASE_URL}/vote`, vote);
+  }
+
+  public submitPoll(
+    poll: PollInterface,
+    options: OptionInterface[]
+  ): Observable<any> {
+    console.log(options);
+    return this.http.post(`${this.BASE_URL}/poll`, { poll, options });
   }
 }

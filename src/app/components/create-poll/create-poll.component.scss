@@ -1,0 +1,28 @@
+.create-wrapper {
+  label {
+    display: block;
+  }
+
+  input {
+    width: 100%;
+    padding: 6px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    font-size: 1rem;
+  }
+
+  .buttons {
+    display: flex;
+    .submit-btn,
+    .add-btn {
+      flex: 1;
+      padding: 12px;
+    }
+    .submit-btn {
+      background: lightsalmon;
+    }
+    .add-btn {
+      background: lightgreen;
+    }
+  }
+}
