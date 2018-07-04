@@ -5,4 +5,5 @@ export interface PollInterface {
   question: string;
   userId: number;
   options?: OptionInterface[];
+  totalVotes?: number;
 }

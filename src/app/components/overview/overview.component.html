@@ -18,16 +18,4 @@
       </tbody>
     </table>
   </div>
-
-  <div class="open-polls" *ngIf="openPolls">
-    <h1>Nya omröstningar</h1>
-    <div class="poll" *ngFor="let poll of openPolls" (click)="goToPoll(poll.id)">
-      {{ poll.question }}
-    </div>
-  </div>
-
-  <div class="closed-polls">
-    <h1>Gamla omröstningar</h1>
-    <p>Det finns inga gamla omröstningar.</p>
-  </div>
 </div>
