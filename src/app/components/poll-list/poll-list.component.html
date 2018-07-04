@@ -1,0 +1,15 @@
+<div class="list-wrapper">
+  <h3>ÄRENDEN ATT RÖSTA PÅ</h3>
+  <div class="poll-group" *ngIf="openPolls.length > 0">
+    <div class="poll" *ngFor="let poll of openPolls" (click)="goToPoll(poll.id)">
+      {{ poll.question }} - {{ poll.totalVotes }}
+    </div>
+  </div>
+
+  <h3>AVKLARADE ÄRENDEN</h3>
+  <div class="poll-group" *ngIf="closedPolls.length > 0">
+    <div class="poll" *ngFor="let poll of closedPolls" (click)="goToPoll(poll.id)">
+      {{ poll.question }} - {{ poll.totalVotes }}
+    </div>
+  </div>
+</div>
