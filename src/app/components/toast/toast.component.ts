@@ -5,7 +5,7 @@ import { ToastInterface } from '../../interfaces/toast.interface';
 @Component({
   selector: 'toast',
   templateUrl: './toast.component.html',
-  styleUrls: ['./toast.component.css']
+  styleUrls: ['./toast.component.scss']
 })
 export class ToastComponent implements OnInit {
   constructor(private toastService: ToastService) {}
