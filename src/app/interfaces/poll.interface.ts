@@ -1,7 +1,7 @@
 import { OptionInterface } from './option.interface';
 
 export interface PollInterface {
-  id: number;
+  id?: number;
   question: string;
   userId: number;
   options?: OptionInterface[];

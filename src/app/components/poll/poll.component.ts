@@ -14,8 +14,7 @@ import { OptionInterface } from '../../interfaces/option.interface';
 export class PollComponent implements OnInit {
   @HostListener('window:resize')
   public onResize(): void {
-    // this.view = [window.innerWidth, window.innerWidth];
-    console.log(window.innerWidth);
+    this.view = [window.innerWidth, window.innerWidth];
   }
 
   public poll: PollInterface;
