@@ -9,12 +9,13 @@ import { OptionInterface } from '../../interfaces/option.interface';
 @Component({
   selector: 'poll',
   templateUrl: './poll.component.html',
-  styleUrls: ['./poll.component.css']
+  styleUrls: ['./poll.component.scss']
 })
 export class PollComponent implements OnInit {
   @HostListener('window:resize')
   public onResize(): void {
-    this.view = [window.innerWidth, window.innerWidth];
+    // this.view = [window.innerWidth, window.innerWidth];
+    console.log(window.innerWidth);
   }
 
   public poll: PollInterface;
@@ -23,8 +24,8 @@ export class PollComponent implements OnInit {
   public graphData: any[] = [];
 
   // Graph settings
-  view = [window.innerWidth, window.innerWidth / 2];
-  autoScale = true;
+  view = [window.innerWidth, window.innerWidth];
+  autoScale = false;
   showLegend = false;
   showLabels = false;
   explodeSlices = false;
