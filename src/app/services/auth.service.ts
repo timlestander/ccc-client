@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import * as moment from 'moment';
 import * as jwt_decode from 'jwt-decode';
 import { Router } from '@angular/router';
 import { UserInterface } from '../interfaces/user.interface';
@@ -16,6 +15,7 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) {
     if (!this.isTokenExpired()) {
       this.user = jwt_decode(this.getToken());
+      console.log(this.user);
     } else {
       this.router.navigateByUrl('/login');
     }
