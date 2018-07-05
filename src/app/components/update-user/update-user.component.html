@@ -1,0 +1,16 @@
+<div class="hh-wrapper">
+  <form [formGroup]="hhForm">
+    HH - NAME - OK
+    <div formArrayName="users">
+      <div *ngFor="let user of hhFormArray.controls; let i=index" [formGroupName]="i" class="row">
+        <input type="checkbox" formControlName="hh" class="hh-input" />
+        <input type="text" formControlName="name" class="name-input" />
+        <input type="number" formControlName="ok" class="ok-input" />
+      </div>
+    </div>
+    <button type="submit">Uppdatera hyrare</button>
+  </form>
+</div>
+<pre>
+{{ hhForm?.value | json }}
+</pre>
