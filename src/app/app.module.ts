@@ -14,6 +14,7 @@ import { AppComponent } from './app.component';
 import { OverviewComponent } from './components/overview/overview.component';
 import { ToastComponent } from './components/toast/toast.component';
 import { PollComponent } from './components/poll/poll.component';
+import { NavComponent } from './components/nav/nav.component';
 
 // Services
 import { AuthService } from './services/auth.service';
@@ -56,7 +57,8 @@ const appRoutes: Routes = [
     OverviewComponent,
     ToastComponent,
     PollComponent,
-    PollListComponent
+    PollListComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,

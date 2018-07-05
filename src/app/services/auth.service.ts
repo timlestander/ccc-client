@@ -5,11 +5,15 @@ import { Observable } from 'rxjs';
 import * as jwt_decode from 'jwt-decode';
 import { Router } from '@angular/router';
 import { UserInterface } from '../interfaces/user.interface';
+import { debug } from 'util';
 
 export const TOKEN_NAME: string = 'token';
 
 @Injectable()
 export class AuthService {
+  //Change localhost to ip client is hosted on e.g., ng serve --host 192.168.1.38
+  private BASE_URL: string = 'http://localhost:3000';
+  
   public user: UserInterface;
 
   constructor(private http: HttpClient, private router: Router) {
@@ -47,7 +51,7 @@ export class AuthService {
 
   public login(username: string, password: string): Observable<any> {
     return this.http
-      .post('http://localhost:3000/login', {
+      .post(`${this.BASE_URL}/login`, {
         username,
         password
       })
@@ -62,7 +66,7 @@ export class AuthService {
   }
 
   public register(user: string): Observable<any> {
-    return this.http.post('http://localhost:3000/register', user);
+    return this.http.post(`${this.BASE_URL}/register`, user);
   }
 
   public logout(): void {
