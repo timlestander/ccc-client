@@ -1,35 +1,37 @@
 .navbar {
-    display: flex;
-    background-color: lightcoral;
-    justify-content: space-between;
-    align-items: center;
-    height: 10vh;
-    margin-bottom: 0px;
-    .active-link {
-        color: lightblue;
-    }
-    .grande {
-        font-size: 3.5em;
-    }
+  display: flex;
+  background: lightcoral;
+  border-top: 1px solid #fff;
+  background-color: lightcoral;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Roboto';
+  height: 10vh;
+  margin-bottom: 0px;
+  .active-link {
+    color: lightblue;
+  }
+  .grande {
+    font-size: 3.5em;
+  }
 }
 
 .navbar a {
-    text-decoration: none;
-    color: white;
-    font-size: 1.5em;
-    display: flex;
-    align-self: center;
-    align-items: center;
-    flex-flow: column nowrap;
-    padding: 0;
-    margin: 0;
+  text-decoration: none;
+  color: white;
+  font-size: 1.5em;
+  display: flex;
+  align-self: center;
+  align-items: center;
+  flex-flow: column nowrap;
+  padding: 0;
+  margin: 0;
 
-    
-    .center{
-        padding-top: 1em;
-    }
+  .center {
+    padding-top: 1em;
+  }
 
-    p {
-        font-size: 1.2rem;
-    }
+  p {
+    font-size: 1.2rem;
+  }
 }
