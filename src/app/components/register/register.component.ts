@@ -30,7 +30,7 @@ export class RegisterComponent implements OnInit {
     console.log(values);
     this.authService.register(values).subscribe((result: any) => {
       if (result.success) {
-        this.router.navigateByUrl('/overview');
+        this.router.navigateByUrl('/');
       } else {
         this.toastService.addToast('error', result.title, result.message);
       }
