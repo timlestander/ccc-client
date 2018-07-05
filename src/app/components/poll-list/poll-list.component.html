@@ -1,17 +1,27 @@
 <div class="list-wrapper">
   <h3>ÄRENDEN ATT RÖSTA PÅ</h3>
-  <div class="poll-group" *ngIf="openPolls.length > 0">
-    <div class="poll" *ngFor="let poll of openPolls" (click)="goToPoll(poll.id)">
-      <span class="question">{{ poll.question }}</span>
-      <span class="vote-count">{{ poll.totalVotes }}</span>
+  <div class="list-group">
+    <div class="poll-group" *ngIf="openPolls.length > 0">
+      <div class="poll" *ngFor="let poll of openPolls" (click)="goToPoll(poll.id)">
+        <span class="question">{{ poll.question }}</span>
+        <span class="vote-count">
+          {{ poll.totalVotes }}
+          <i class="glyphicon glyphicon-ok"></i>
+        </span>
+      </div>
     </div>
   </div>
 
   <h3>AVKLARADE ÄRENDEN</h3>
-  <div class="poll-group" *ngIf="closedPolls.length > 0">
-    <div class="poll" *ngFor="let poll of closedPolls" (click)="goToPoll(poll.id)">
-      <span class="question">{{ poll.question }}</span>
-      <span class="vote-count">{{ poll.totalVotes }}</span>
+  <div class="list-group">
+    <div class="poll-group" *ngIf="closedPolls.length > 0">
+      <div class="poll" *ngFor="let poll of closedPolls" (click)="goToPoll(poll.id)">
+        <span class="question">{{ poll.question }}</span>
+        <span class="vote-count">
+          {{ poll.totalVotes }}
+          <i class="glyphicon glyphicon-ok"></i>
+        </span>
+      </div>
     </div>
   </div>
 </div>
