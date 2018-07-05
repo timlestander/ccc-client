@@ -64,11 +64,8 @@ const appRoutes: Routes = [
     ToastComponent,
     PollComponent,
     PollListComponent,
-<<<<<<< HEAD
-    CreatePollComponent
-=======
-    NavComponent
->>>>>>> bottomnavigation
+    CreatePollComponent,
+    NavComponent,
   ],
   imports: [
     BrowserModule,
