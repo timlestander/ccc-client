@@ -1,15 +1,4 @@
 <div class="wrapper">
-  <!-- <header>
-    <div class="left">
-      <i class="fas fa-bars"></i>
-      <span>CCC</span>
-    </div>
-    <div class="right">
-      <div class="name" *ngIf="authService.isLoggedIn">{{ authService.user.name }} - {{ authService.user.ok }}/ok</div>
-      <div class="login" *ngIf="!authService.isLoggedIn">Logga in</div>
-      <div class="logout" *ngIf="authService.isLoggedIn" (click)="authService.logout()">x</div>
-    </div>
-  </header> -->
   <main>
     <router-outlet></router-outlet>
     <toast></toast>
