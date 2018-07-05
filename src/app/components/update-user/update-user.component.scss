@@ -1,0 +1,28 @@
+.hh-wrapper {
+  .row {
+    margin: 10px 0;
+
+    input {
+      padding: 10px;
+    }
+
+    .hh-input {
+      width: 40px;
+    }
+
+    .name-input {
+      width: 40%;
+    }
+
+    .ok-input {
+      width: 60px;
+      margin-left: 20px;
+    }
+  }
+  button {
+    width: 100%;
+    box-sizing: border-box;
+    background: green;
+    padding: 15px;
+  }
+}
