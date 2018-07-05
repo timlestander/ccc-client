@@ -39,6 +39,7 @@ export class UpdateUserComponent implements OnInit {
             { value: user.name, disabled: true },
             Validators.required
           ),
+          id: new FormControl(user.id, Validators.required),
           ok: new FormControl(user.ok, Validators.required)
         })
       );
@@ -60,13 +61,14 @@ export class UpdateUserComponent implements OnInit {
     });
 
     if (hhCounter === 1) {
-      this.apiService.updateUsers(value.users).subscrieb((response: any) => {
+      this.apiService.updateUsers(value.users).subscribe((response: any) => {
         if (response.success) {
           this.toastService.addToast(
             'success',
             'Uppdateringen lyckades',
             'Allt gick bra och någon annan är nu HH. Bara att kämpa på så kanske du blir HH imorgon på nytt'
           );
+          this.router.navigateByUrl('/');
         } else {
           this.toastService.addToast(
             'error',
@@ -75,6 +77,12 @@ export class UpdateUserComponent implements OnInit {
           );
         }
       });
+    } else {
+      this.toastService.addToast(
+        'error',
+        'Felaktig inmatning',
+        'Vad håller du på med? Endast en kan vara superhyrare och ha HH'
+      );
     }
   }
 }
