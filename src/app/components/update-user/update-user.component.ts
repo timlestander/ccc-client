@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { UserInterface } from '../../interfaces/user.interface';
 import { Validators, FormGroup, FormArray, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-update-user',
@@ -11,7 +13,11 @@ import { Validators, FormGroup, FormArray, FormControl } from '@angular/forms';
 export class UpdateUserComponent implements OnInit {
   public hhForm: FormGroup;
 
-  constructor(private apiService: ApiService) {
+  constructor(
+    private apiService: ApiService,
+    private router: Router,
+    private toastService: ToastService
+  ) {
     this.hhForm = new FormGroup({
       users: new FormArray([])
     });
@@ -41,5 +47,34 @@ export class UpdateUserComponent implements OnInit {
 
   public get hhFormArray(): FormArray {
     return this.hhForm.controls['users'] as FormArray;
+  }
+
+  public onSubmit(value: any): void {
+    let hhCounter: number = 0;
+    value.users.forEach((user: any) => {
+      if (user.ok > 5) user.ok = 5;
+      if (user.ok < 1) user.ok = 1;
+      if (user.hh) {
+        hhCounter++;
+      }
+    });
+
+    if (hhCounter === 1) {
+      this.apiService.updateUsers(value.users).subscrieb((response: any) => {
+        if (response.success) {
+          this.toastService.addToast(
+            'success',
+            'Uppdateringen lyckades',
+            'Allt gick bra och någon annan är nu HH. Bara att kämpa på så kanske du blir HH imorgon på nytt'
+          );
+        } else {
+          this.toastService.addToast(
+            'error',
+            'Något gick fel',
+            'Det där gick inte så bra. Försök igen.'
+          );
+        }
+      });
+    }
   }
 }
