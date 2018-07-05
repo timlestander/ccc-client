@@ -31,6 +31,10 @@ export class ApiService {
     return this.http.post(`${this.BASE_URL}/vote`, vote);
   }
 
+  public updateUsers(users: any): Observable<any> {
+    return this.http.put(`${this.BASE_URL}/users`, users);
+  }
+
   public submitPoll(
     poll: PollInterface,
     options: OptionInterface[]
