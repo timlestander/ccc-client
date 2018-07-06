@@ -11,7 +11,7 @@ import { VoteInterface } from '../interfaces/vote.interface';
 })
 export class ApiService {
   //Change localhost to ip client is hosted on e.g., ng serve --host 192.168.1.38
-  private BASE_URL: string = 'http://192.1:3000';
+  private BASE_URL: string = 'http://localhost:3000';
 
   constructor(private http: HttpClient) {}
 
