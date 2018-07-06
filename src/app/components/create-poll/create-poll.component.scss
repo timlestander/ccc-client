@@ -1,14 +1,32 @@
 .create-wrapper {
   label {
     display: block;
+    color: #fff;
+    font-size: 1.6rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  h1 {
+    text-align: center;
+    font-family: 'Roboto', 'Arial';
+    font-weight: 900;
+    color: #fff;
+    text-transform: uppercase;
+    margin-bottom: 30px;
   }
 
   input {
     width: 100%;
-    padding: 6px;
+    padding: 10px;
     margin-bottom: 10px;
     box-sizing: border-box;
-    font-size: 1rem;
+    font-size: 1.4rem;
+    border: none;
+
+    &:focus {
+      border: none;
+    }
   }
 
   form {
@@ -21,12 +39,22 @@
     .add-btn {
       flex: 1;
       padding: 12px;
+      border: none;
+      color: #fff;
+      font-size: 1.5rem;
     }
     .submit-btn {
-      background: lightsalmon;
+      background: lightcoral;
+      margin-right: 5px;
     }
     .add-btn {
-      background: lightgreen;
+      background: lightcoral;
+      margin-left: 5px;
+    }
+
+    i {
+      margin-left: 10px;
+      font-size: 1.5rem;
     }
   }
 }

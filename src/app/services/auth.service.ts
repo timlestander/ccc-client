@@ -13,7 +13,7 @@ export const TOKEN_NAME: string = 'token';
 export class AuthService {
   //Change localhost to ip client is hosted on e.g., ng serve --host 192.168.1.38
   private BASE_URL: string = 'http://localhost:3000';
-  
+
   public user: UserInterface;
 
   constructor(private http: HttpClient, private router: Router) {
