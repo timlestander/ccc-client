@@ -13,7 +13,7 @@ export class OverviewComponent implements OnInit {
   public users: UserInterface[];
   public openPolls: PollInterface[];
 
-  constructor(private apiService: ApiService, private router: Router) {}
+  constructor(private apiService: ApiService, private router: Router) { }
 
   ngOnInit() {
     this.apiService.getAllUsers().subscribe(
@@ -38,4 +38,9 @@ export class OverviewComponent implements OnInit {
   public goToPoll(id: number): void {
     this.router.navigateByUrl(`/poll/${id}`);
   }
+
+  /*public drawCircle() {
+    const footer = document.querySelector('ul');
+    footer.setAttribute('class', 'circle-container');
+  }*/
 }
