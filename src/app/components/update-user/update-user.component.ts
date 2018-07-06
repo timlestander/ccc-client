@@ -34,7 +34,7 @@ export class UpdateUserComponent implements OnInit {
     users.forEach((user: UserInterface) => {
       controls.push(
         new FormGroup({
-          hh: new FormControl(user.hh, Validators.required),
+          hh: new FormControl(false, Validators.required),
           name: new FormControl(
             { value: user.name, disabled: true },
             Validators.required

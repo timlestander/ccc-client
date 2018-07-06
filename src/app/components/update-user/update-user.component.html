@@ -1,9 +1,16 @@
 <div class="hh-wrapper">
   <form [formGroup]="hhForm" (ngSubmit)="onSubmit(hhForm.value)">
-    HH - NAME - OK
+    <div class="headers">
+      <div class="hh-header">HH</div>
+      <div class="name-header">Namn</div>
+      <div class="ok-header">OK</div>
+    </div>
     <div formArrayName="users">
       <div *ngFor="let user of hhFormArray.controls; let i=index" [formGroupName]="i" class="row">
-        <input type="checkbox" formControlName="hh" class="hh-input" />
+        <label class="container hh-input">
+          <input type="checkbox">
+          <span class="checkmark"></span>
+        </label>
         <input type="text" formControlName="name" class="name-input" />
         <input type="number" formControlName="ok" class="ok-input" />
       </div>
