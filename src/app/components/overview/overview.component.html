@@ -1,21 +1,16 @@
 <div class="overview-wrapper">
   <div class="members" *ngIf="users">
     <h3>Närvarande i rättegången</h3>
-    <table *ngIf="users">
-      <thead>
-        <tr>
-          <td>Namn</td>
-          <td>OK</td>
-          <td>HH</td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let user of users">
-          <td>{{ user.name }}</td>
-          <td>{{ user.ok }}</td>
-          <td>{{ user.hh }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="rotate-circle">
+      <ul class='circle-container'>
+        <li *ngFor="let user of users">
+          <p>
+          <i *ngIf="user.hh" class="glyphicon glyph glyphicon-king">{{user.ok}}</i>
+          <i *ngIf="!user.hh" class="glyphicon glyph glyphicon-pawn">{{user.ok}}</i>
+          {{user.username}}
+          </p>
+        </li>
+      </ul>
+      <img class="bulgatia" src="bulgatia.png" alt="" width="180" height="90">
+    </div>
   </div>
-</div>
