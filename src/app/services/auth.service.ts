@@ -12,7 +12,7 @@ export const TOKEN_NAME: string = 'token';
 @Injectable()
 export class AuthService {
   //Change localhost to ip client is hosted on e.g., ng serve --host 192.168.1.38
-  private BASE_URL: string = 'http://localhost:3000';
+  private BASE_URL: string = 'http://192.168.1.40:3000';
   
   public user: UserInterface;
 
