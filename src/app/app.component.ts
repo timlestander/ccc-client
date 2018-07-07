@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from './services/auth.service';
+import { GameService } from './services/game.service';
 
 @Component({
   selector: 'app-root',
@@ -7,5 +8,14 @@ import { AuthService } from './services/auth.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor(private authService: AuthService) {}
+  public gameWinner: string;
+
+  constructor(
+    private authService: AuthService,
+    private gameService: GameService
+  ) {
+    this.gameService.gameStatus.subscribe((name: string) => {
+      this.gameWinner = name;
+    });
+  }
 }

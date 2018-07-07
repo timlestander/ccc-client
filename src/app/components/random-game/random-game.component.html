@@ -1,0 +1,5 @@
+<div class="wrapper">
+  <p>Och vinnaren är..</p>
+  <h1 *ngIf="gameWinner">{{ gameWinner }}</h1>
+  <button (click)="gameService.endGame()">Stäng</button>
+</div>
