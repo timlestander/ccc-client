@@ -10,6 +10,9 @@
         </span>
       </div>
     </div>
+    <p *ngIf="openPolls.length === 0">Just nu finns det inga ärenden att rösta på.
+      <br />
+      <a routerLink="/createpoll">Skapa ett</a> eller vänta.</p>
   </div>
 
   <h3>AVKLARADE ÄRENDEN</h3>
@@ -18,10 +21,11 @@
       <div class="poll" *ngFor="let poll of closedPolls" (click)="goToPoll(poll.id)">
         <span class="question">{{ poll.question }}</span>
         <span class="vote-count">
-          {{ poll.totalVotes }}
+          <span>{{ poll.totalVotes }}</span>
           <i class="glyphicon glyphicon-ok"></i>
         </span>
       </div>
     </div>
+    <p *ngIf="closedPolls.length === 0">Du har inte röstat på några ärenden.</p>
   </div>
 </div>

@@ -34,7 +34,7 @@ export class UpdateUserComponent implements OnInit {
     users.forEach((user: UserInterface) => {
       controls.push(
         new FormGroup({
-          hh: new FormControl(false, Validators.required),
+          hh: new FormControl(user.hh, Validators.required),
           name: new FormControl(
             { value: user.name, disabled: true },
             Validators.required
@@ -51,6 +51,7 @@ export class UpdateUserComponent implements OnInit {
   }
 
   public onSubmit(value: any): void {
+    console.log(value);
     let hhCounter: number = 0;
     value.users.forEach((user: any) => {
       if (user.ok > 5) user.ok = 5;

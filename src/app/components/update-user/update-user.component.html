@@ -8,7 +8,7 @@
     <div formArrayName="users">
       <div *ngFor="let user of hhFormArray.controls; let i=index" [formGroupName]="i" class="row">
         <label class="container hh-input">
-          <input type="checkbox">
+          <input type="checkbox" formControlName="hh">
           <span class="checkmark"></span>
         </label>
         <input type="text" formControlName="name" class="name-input" />
