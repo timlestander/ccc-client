@@ -10,6 +10,9 @@
         </span>
       </div>
     </div>
+    <p *ngIf="openPolls.length === 0">Just nu finns det inga ärenden att rösta på.
+      <br />
+      <a routerLink="/createpoll">Skapa ett</a> eller vänta.</p>
   </div>
 
   <h3>AVKLARADE ÄRENDEN</h3>
@@ -23,5 +26,6 @@
         </span>
       </div>
     </div>
+    <p *ngIf="closedPolls.length === 0">Du har inte röstat på några ärenden.</p>
   </div>
 </div>
