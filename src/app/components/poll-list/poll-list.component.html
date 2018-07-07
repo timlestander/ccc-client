@@ -18,7 +18,7 @@
       <div class="poll" *ngFor="let poll of closedPolls" (click)="goToPoll(poll.id)">
         <span class="question">{{ poll.question }}</span>
         <span class="vote-count">
-          {{ poll.totalVotes }}
+          <span>{{ poll.totalVotes }}</span>
           <i class="glyphicon glyphicon-ok"></i>
         </span>
       </div>

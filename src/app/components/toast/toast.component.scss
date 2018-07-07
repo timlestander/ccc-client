@@ -2,13 +2,14 @@
   z-index: 100;
   position: fixed;
   top: 10px;
-  right: 10px;
+  left: 10px;
 
   .toast-wrapper {
-    width: 250px;
+    width: calc(100vw - 20px);
     min-height: 50px;
-    padding: 15px;
-    background: green;
+    border-radius: 4px;
+    padding: 12px;
+    font-family: 'Roboto';
 
     &.info {
       color: #00529b;
@@ -27,18 +28,19 @@
   }
 
   .close {
-    position: absolute;
-    font-size: 1rem;
-    top: 8px;
-    right: 8px;
+    position: relative;
+    font-size: 2.6rem;
+    top: 0px;
+    right: 0px;
   }
 
   .title {
-    font-size: 0.9rem;
+    font-size: 2rem;
+    margin-top: 0;
   }
 
   .message {
     margin-top: 5px;
-    font-size: 0.8rem;
+    font-size: 1.3rem;
   }
 }

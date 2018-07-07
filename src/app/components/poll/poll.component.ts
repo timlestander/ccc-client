@@ -14,7 +14,7 @@ import { OptionInterface } from '../../interfaces/option.interface';
 export class PollComponent implements OnInit {
   @HostListener('window:resize')
   public onResize(): void {
-    this.view = [window.innerWidth, window.innerWidth];
+    this.view = [window.innerWidth - 120, window.innerWidth - 120];
   }
 
   public poll: PollInterface;
@@ -23,14 +23,24 @@ export class PollComponent implements OnInit {
   public graphData: any[] = [];
 
   // Graph settings
-  view = [window.innerWidth, window.innerWidth];
-  autoScale = false;
+  view = [window.innerWidth - 120, window.innerWidth - 120];
+  autoScale = true;
   showLegend = false;
   showLabels = false;
-  explodeSlices = false;
+  explodeSlices = true;
   doughnut = false;
   colorScheme = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+    domain: [
+      'rgb(225, 151, 76)',
+      'rgb(132, 186, 91)',
+      'rgb(211, 94, 95)',
+      'rgb(128, 133, 133)',
+      'rgb(144, 103, 167)',
+      'rgb(171, 104, 87)',
+      'rgb(204, 194, 16)',
+      'rgb(0, 0, 0)',
+      'rgb(255, 255, 255)'
+    ]
   };
   margin: [0, 0, 0, 0];
 

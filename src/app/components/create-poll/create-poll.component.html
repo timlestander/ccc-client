@@ -6,7 +6,7 @@
       <input type="text" formControlName="question">
     </div>
     <div formArrayName="options">
-      <label>Svar {{ i }}</label>
+      <label>Svar</label>
       <div *ngFor="let option of optionsFormArray.controls; let i=index" [formGroupName]="i">
         <input type="text" formControlName="text">
       </div>

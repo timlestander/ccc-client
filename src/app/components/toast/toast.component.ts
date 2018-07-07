@@ -11,13 +11,15 @@ export class ToastComponent implements OnInit {
   constructor(private toastService: ToastService) {}
 
   public currentToast: ToastInterface = null;
+  public toastTimer: any;
 
   public ngOnInit(): void {
     this.toastService.getToasts().subscribe((toast: ToastInterface) => {
+      clearInterval(this.toastTimer);
       this.currentToast = toast;
-      setTimeout(() => {
+      this.toastTimer = setTimeout(() => {
         this.closeToast();
-      }, 4000);
+      }, 8000);
     });
   }
 
