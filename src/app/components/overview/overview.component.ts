@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { Router } from '@angular/router';
 import { UserInterface } from '../../interfaces/user.interface';
 import { PollInterface } from '../../interfaces/poll.interface';
+import { GameService } from '../../services/game.service';
 
 @Component({
   selector: 'app-overview',
@@ -11,9 +12,14 @@ import { PollInterface } from '../../interfaces/poll.interface';
 })
 export class OverviewComponent implements OnInit {
   public users: UserInterface[];
-  public openPolls: PollInterface[];
+  public clickTimer: any;
+  public clicks: number = 0;
 
-  constructor(private apiService: ApiService, private router: Router) { }
+  constructor(
+    private apiService: ApiService,
+    private router: Router,
+    private gameService: GameService
+  ) {}
 
   ngOnInit() {
     this.apiService.getAllUsers().subscribe(
@@ -24,19 +30,22 @@ export class OverviewComponent implements OnInit {
         console.log(error);
       }
     );
-
-    this.apiService.getAllPolls().subscribe(
-      (data: PollInterface[]) => {
-        this.openPolls = data;
-      },
-      (error: any) => {
-        console.log(error);
-      }
-    );
   }
 
-  public goToPoll(id: number): void {
-    this.router.navigateByUrl(`/poll/${id}`);
+  public flagClicked(): void {
+    clearTimeout(this.clickTimer);
+    this.clicks++;
+    this.clickTimer = setTimeout(() => {
+      this.clicks = 0;
+    }, 300);
+    if (this.clicks === 3) {
+      this.startRandomGame();
+    }
+  }
+
+  public startRandomGame(): void {
+    let idx: number = Math.floor(Math.random() * this.users.length);
+    this.gameService.startGame(this.users[idx].name);
   }
 
   /*public drawCircle() {
