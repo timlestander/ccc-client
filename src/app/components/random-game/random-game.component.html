@@ -1,9 +1,9 @@
 <div class="wrapper">
   <h3>Den bödeln utser är: <br/> {{ winningPerson }}</h3>
   <canvas id="spinwheel" height="400px" width="350px"></canvas>
-  <button *ngIf="!this.wheelFinished" (click)="startSpin()">Låt bödeln säga sitt!</button>
-  <div class="buttons" *ngIf="this.wheelFinished">
-    <button (click)="resetWheel()">Trotsa bödeln!</button>
+  <div class="buttons">
+    <button *ngIf="this.wheelFinished" (click)="resetWheel()">Trotsa bödeln!</button>
+    <button *ngIf="!this.wheelFinished" (click)="startSpin()">Låt bödeln säga sitt!</button>
     <button (click)="closeWheel()">Avsluta</button>
   </div>
 </div>
