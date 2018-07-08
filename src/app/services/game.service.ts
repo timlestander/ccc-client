@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 export class GameService {
 
   private gameServiceActive: boolean = false;
+  private feeling: boolean = false;
 
   getGameStatus() {
     return this.gameServiceActive;
@@ -17,5 +18,13 @@ export class GameService {
 
   closeGame() {
     this.gameServiceActive = false;
+  }
+
+  getFeeling() {
+    return this.feeling;
+  }
+
+  setFeeling(value) {
+    this.feeling = value;
   }
 }

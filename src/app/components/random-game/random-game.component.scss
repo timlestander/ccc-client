@@ -57,4 +57,7 @@ button {
     text-transform: uppercase;
     margin-top: 10px;
     outline: none;
-  }
+}
+button:disabled {
+    background: #ccc;
+}

@@ -9,4 +9,4 @@
   <app-nav></app-nav>
 </div>
 
-<app-random-game *ngIf="gameService.getGameStatus()" [users]="apiService.getAllUsers()"></app-random-game>
+<app-random-game *ngIf="gameService.getGameStatus()" [users]="apiService.getAllUsers()" [elimination]="this.gameService.getFeeling()"></app-random-game>

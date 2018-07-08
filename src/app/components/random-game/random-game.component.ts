@@ -12,14 +12,32 @@ import { GameService } from '../../services/game.service';
 export class RandomGameComponent implements AfterViewInit, OnDestroy {
   wheel;
   timer;
+  endTimer;
 
   private unsubscribe$: Subject<void> = new Subject<void>();
 
   wheelSpinning = false;
   wheelFinished = false;
+  endOfGame = false;
+  spinSpeed = 5;
+  numOfSpins = 4;
+  resetText = 'Trotsa bödeln!';
+  message = 'Den bödeln utser är:';
 
   @Input() users: any;
   numOfUsers: number;
+
+  @Input()
+  public set elimination(value: boolean) {
+    this._elimination = value;
+    if (value) {
+      this.message = 'Bödeln väljer att skona:';
+      this.spinSpeed = 1;
+      this.numOfSpins = 1;
+    }
+  }
+  public get elimination(): boolean { return this._elimination; }
+  private _elimination: boolean = false;
 
   winningPerson: string = '';
   winningNumber: number;
@@ -33,6 +51,7 @@ export class RandomGameComponent implements AfterViewInit, OnDestroy {
     this.users.pipe(takeUntil(this.unsubscribe$)).subscribe(users => {
       const length = users.length;
       const segments = this.getSegments(users);
+      this.numOfUsers = length;
 
       this.initWheel({
         'numOfUsers': length,
@@ -62,8 +81,8 @@ export class RandomGameComponent implements AfterViewInit, OnDestroy {
       'animation':           // Define spin to stop animation.
       {
         'type': 'spinToStop',
-        'duration': 5,
-        'spins': 4,
+        'duration': this.spinSpeed,
+        'spins': this.numOfSpins,
       }
     });
   }
@@ -121,9 +140,29 @@ export class RandomGameComponent implements AfterViewInit, OnDestroy {
         this.winningNumber = this.wheel.getIndicatedSegmentNumber();
         this.winningColor = this.wheel.segments[this.winningNumber].fillStyle;
         this.wheel.segments[this.winningNumber].fillStyle = 'green';
+        if (this.elimination) {
+          this.resetText = 'Fortsätt';
+          if (this.numOfUsers === 3) {
+            this.spinSpeed = 5;
+            this.numOfSpins = 3;
+            this.wheel.animation.duration = this.spinSpeed;
+            this.wheel.animation.spins = this.numOfSpins;
+          }
+          if (this.numOfUsers === 2) {
+            this.endOfGame = true;
+            this.spinSpeed = 1;
+            this.numOfSpins = 1;
+            this.wheel.animation.duration = this.spinSpeed;
+            this.wheel.animation.spins = this.numOfSpins;
+            this.endTimer = setTimeout(() => {
+              this.message = 'Bödeln slaktar alltså:';
+              this.resetWheel();
+            }, 1000);
+          }
+        }
         this.wheel.draw();
         this.wheelFinished = true;
-      }, 5100);
+      }, this.spinSpeed * 1000 + 100);
     }
   }
 
@@ -134,6 +173,10 @@ export class RandomGameComponent implements AfterViewInit, OnDestroy {
     this.wheel.stopAnimation(false);  // Stop the animation, false as param so does not call callback function.
     this.wheel.rotationAngle = 0;     // Re-set the wheel angle to 0 degrees.
     this.wheel.segments[this.winningNumber].fillStyle = this.winningColor;
+    if (this.elimination) {
+      this.wheel.deleteSegment(this.winningNumber);
+      this.numOfUsers--;
+    }
     this.winningPerson = '';
     this.wheel.draw();                // Call draw to render changes to the wheel.
     this.wheelSpinning = false;
@@ -147,6 +190,7 @@ export class RandomGameComponent implements AfterViewInit, OnDestroy {
 
   ngOnDestroy() {
     clearTimeout(this.timer);
+    clearTimeout(this.endTimer);
     this.unsubscribe$.next();
   }
 

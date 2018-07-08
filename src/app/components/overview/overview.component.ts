@@ -14,6 +14,13 @@ export class OverviewComponent implements OnInit {
   public users: UserInterface[];
   public openPolls: PollInterface[];
 
+  public get feeling(): boolean { return this._feeling; }
+  public set feeling(value: boolean) {
+    this._feeling = value;
+    this.gameService.setFeeling(value);
+  }
+  private _feeling: boolean = false;
+
   constructor(private apiService: ApiService, private router: Router, public gameService: GameService) { }
 
   ngOnInit() {
