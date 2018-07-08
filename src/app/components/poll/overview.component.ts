@@ -14,7 +14,6 @@ import { ToastService } from '../../services/toast.service';
 export class OverviewComponent implements OnInit {
   public users: UserInterface[];
   public clickTimer: any;
-  public clicks: number = 0;
 
   constructor(
     private apiService: ApiService,
@@ -28,22 +27,12 @@ export class OverviewComponent implements OnInit {
       if (response.success) {
         this.users = response.data;
       } else {
-        console.log('hwat');
         this.toastService.addDefaultError();
       }
     });
   }
 
-  public flagClicked(): void {
-    clearTimeout(this.clickTimer);
-    this.clicks++;
-    this.clickTimer = setTimeout(() => {
-      this.clicks = 0;
-    }, 300);
-    if (this.clicks === 3) {
-      this.startRandomGame();
-    }
-  }
+  public flagClicked(): void {}
 
   public startRandomGame(): void {
     let idx: number = Math.floor(Math.random() * this.users.length);

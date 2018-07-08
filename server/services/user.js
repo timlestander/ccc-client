@@ -6,7 +6,6 @@ const addUser = user => {
 
 const updateUser = async users => {
   users.forEach(async user => {
-    console.log(user);
     await Users.update(
       {
         hh: user.hh,
@@ -18,7 +17,6 @@ const updateUser = async users => {
         }
       }
     );
-    console.log('First done');
   });
   return users;
 };

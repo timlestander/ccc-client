@@ -11,7 +11,6 @@ const authenticate = params => {
     },
     raw: true
   }).then(user => {
-    console.log(user);
     if (!user) throw new Error('Authentication failed. User not found');
     if (params.password !== user.password)
       throw new Error('Authentication failed. Wrong password');

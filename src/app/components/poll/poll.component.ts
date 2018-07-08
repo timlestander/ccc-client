@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { VoteInterface } from '../../interfaces/vote.interface';
 import { OptionInterface } from '../../interfaces/option.interface';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'poll',
@@ -47,7 +48,8 @@ export class PollComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private authService: AuthService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private toastService: ToastService
   ) {}
 
   ngOnInit() {
@@ -58,16 +60,15 @@ export class PollComponent implements OnInit {
   }
 
   public fetchData(pollId: number): void {
-    this.apiService.getPollById(pollId).subscribe(
-      (poll: PollInterface) => {
-        this.poll = poll;
-        this.extractVotes(poll);
-        this.hasVoted = this.setVotedStatus(poll);
-      },
-      (error: any) => {
-        console.log(error);
+    this.apiService.getPollById(pollId).subscribe((response: any) => {
+      if (response.success) {
+        this.poll = response.data;
+        this.extractVotes(this.poll);
+        this.hasVoted = this.setVotedStatus(this.poll);
+      } else {
+        this.toastService.addDefaultError();
       }
-    );
+    });
   }
 
   public submitVote(option: OptionInterface): void {
@@ -76,16 +77,13 @@ export class PollComponent implements OnInit {
       optionId: option.id,
       ok: this.authService.user.ok
     };
-    this.apiService.submitVote(values).subscribe(
-      (response: any) => {
-        if (response.success) {
-          this.fetchData(this.pollId);
-        }
-      },
-      (error: any) => {
-        console.log(error);
+    this.apiService.submitVote(values).subscribe((response: any) => {
+      if (response.success) {
+        this.fetchData(this.pollId);
+      } else {
+        this.toastService.addDefaultError();
       }
-    );
+    });
   }
 
   public extractVotes(poll: PollInterface): void {
@@ -101,7 +99,6 @@ export class PollComponent implements OnInit {
   public calculateValue(votes: VoteInterface[]): number {
     let total: number = 0;
     votes.forEach((vote: VoteInterface) => {
-      console.log(vote.ok);
       total += vote.ok * 1;
     });
     return total;

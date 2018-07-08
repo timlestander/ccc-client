@@ -1,22 +1,29 @@
 const userService = require('../services/user');
+const asyncErrorHandler = require('../middlewares/async').asyncError;
 
-const getAllUsers = async (req, res) => {
+const getAllUsers = asyncErrorHandler(async (req, res, next) => {
   const users = await userService.getAllUsers();
-  res.send(users);
-};
+  res.send({
+    success: true,
+    data: users
+  });
+});
 
-const getUserById = async (req, res) => {
+const getUserById = asyncErrorHandler(async (req, res, next) => {
   const user = await userService.getUserById(req.params.id);
-  res.send(user);
-};
+  res.send({
+    success: true,
+    data: user
+  });
+});
 
-const updateUser = async (req, res) => {
+const updateUser = asyncErrorHandler(async (req, res, next) => {
   //TODO sanity check body
   await userService.updateUser(req.body);
   res.send({
     success: true
   });
-};
+});
 
 module.exports = {
   getAllUsers,

@@ -40,7 +40,6 @@ export class ApiService {
     poll: PollInterface,
     options: OptionInterface[]
   ): Observable<any> {
-    console.log(options);
     return this.http.post(`${this.BASE_URL}/poll`, { poll, options });
   }
 }

@@ -20,7 +20,6 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) {
     if (!this.isTokenExpired()) {
       this.user = jwt_decode(this.getToken());
-      console.log(this.user);
     } else {
       this.router.navigateByUrl('/login');
     }

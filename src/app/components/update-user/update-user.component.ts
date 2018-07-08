@@ -24,8 +24,12 @@ export class UpdateUserComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.apiService.getAllUsers().subscribe((users: UserInterface[]) => {
-      this.initForm(users);
+    this.apiService.getAllUsers().subscribe((response: any) => {
+      if (response.success) {
+        this.initForm(response.data);
+      } else {
+        this.toastService.addDefaultError();
+      }
     });
   }
 
@@ -51,7 +55,6 @@ export class UpdateUserComponent implements OnInit {
   }
 
   public onSubmit(value: any): void {
-    console.log(value);
     let hhCounter: number = 0;
     value.users.forEach((user: any) => {
       if (user.ok > 5) user.ok = 5;

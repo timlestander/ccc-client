@@ -50,8 +50,9 @@ export class CreatePollComponent implements OnInit {
       question: values.question,
       userId: this.authService.user.id
     };
-    this.apiService.submitPoll(pollData, optionsData).subscribe(
-      (response: any) => {
+    this.apiService
+      .submitPoll(pollData, optionsData)
+      .subscribe((response: any) => {
         if (response.success) {
           this.toastService.addToast(
             'success',
@@ -59,16 +60,10 @@ export class CreatePollComponent implements OnInit {
             'Allting gick enligt planen. Nu kan du slänga iväg en röst'
           );
           this.router.navigateByUrl('/polls');
+        } else {
+          this.toastService.addDefaultError();
         }
-      },
-      (error: any) => {
-        this.toastService.addToast(
-          'error',
-          'Någonting gick fel',
-          'Det är högst oklart vad som gick fel. Men det finns läge att oroa sig.'
-        );
-      }
-    );
+      });
   }
 
   ngOnInit() {}
