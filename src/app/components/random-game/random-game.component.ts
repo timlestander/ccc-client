@@ -67,7 +67,7 @@ export class RandomGameComponent implements AfterViewInit, OnDestroy {
     this.wheel = new Winwheel({
       canvasId: 'spinwheel',
       outerRadius: 150,
-      textFontSize: 18,
+      textFontSize: 15,
       textAlignment: 'outer',
       numSegments: userData.numOfUsers,
       lineWidth: 3,
@@ -128,7 +128,7 @@ export class RandomGameComponent implements AfterViewInit, OnDestroy {
     users.forEach((user, index) => {
       array.push({
         fillStyle: getRandomColor(index),
-        text: user.username.substring(0, 10)
+        text: user.name.substring(0, 12)
       });
     });
     return array;

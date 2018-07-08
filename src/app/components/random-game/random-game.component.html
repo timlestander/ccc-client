@@ -1,9 +1,11 @@
 <div class="wrapper">
-  <h3>{{message}} <br/> {{ winningPerson }}</h3>
+  <h3>{{message}}
+    <br />{{ winningPerson }}
+  </h3>
   <canvas id="spinwheel" height="400px" width="350px"></canvas>
   <div class="buttons">
     <button *ngIf="this.wheelFinished" (click)="resetWheel()" [disabled]="endOfGame">{{ resetText }}</button>
-    <button *ngIf="!this.wheelFinished" (click)="startSpin()">Låt bödeln säga sitt!</button>
+    <button *ngIf="!this.wheelFinished" (click)="startSpin()">Let's go</button>
     <button (click)="closeWheel()">Avsluta</button>
   </div>
 </div>
