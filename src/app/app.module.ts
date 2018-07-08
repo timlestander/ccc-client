@@ -26,9 +26,6 @@ import { AuthGuard } from './services/auth.guard';
 import { ToastService } from './services/toast.service';
 import { ApiService } from './services/api.service';
 import { GameService } from './services/game.service';
-import { PollListComponent } from './components/poll-list/poll-list.component';
-import { UpdateUserComponent } from './components/update-user/update-user.component';
-import { RandomGameComponent } from './components/random-game/random-game.component';
 
 const appRoutes: Routes = [
   {

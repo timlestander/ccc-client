@@ -7,13 +7,12 @@ import { PollInterface } from '../interfaces/poll.interface';
 import { VoteInterface } from '../interfaces/vote.interface';
 import { environment } from '../../environments/environment';
 
-export const BASE_URL: string = 'http://159.65.201.78:3000';
+export const BASE_URL: string = environment.apiUrl;
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-
   constructor(private http: HttpClient) {}
 
   public getAllUsers(): Observable<UserInterface[]> {

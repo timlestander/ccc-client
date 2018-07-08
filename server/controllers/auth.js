@@ -6,6 +6,7 @@ const asyncErrorHandler = require('../middlewares/async').asyncError;
 
 const login = asyncErrorHandler(async (req, res, next) => {
   const user = await userService.getUserByUsername(req.body.username);
+  console.log('WTF?');
 
   if (!user) {
     res.send({

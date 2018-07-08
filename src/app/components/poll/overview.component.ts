@@ -36,11 +36,6 @@ export class OverviewComponent implements OnInit {
 
   public startRandomGame(): void {
     let idx: number = Math.floor(Math.random() * this.users.length);
-    this.gameService.startGame(this.users[idx].name);
+    this.gameService.setActive();
   }
-
-  /*public drawCircle() {
-    const footer = document.querySelector('ul');
-    footer.setAttribute('class', 'circle-container');
-  }*/
 }

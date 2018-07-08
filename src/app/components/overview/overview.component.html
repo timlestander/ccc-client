@@ -1,8 +1,8 @@
 <div class="overview-wrapper">
   <div class="members" *ngIf="users">
-    <h3>Närvarande i rättegången</h3>
+    <h1>Närvarande i rättegången</h1>
     <div class="executionSwitch">
-      <span>Gruppens sinnesstämmning '{{feeling? 'SLAKTA' : 'PRISA'}}'</span>
+      <span>Gruppens sinnesstämmning: {{feeling ? 'SLAKTA' : 'PRISA' }}</span>
       <label class="switch">
         <input type="checkbox" [checked]="feeling" (change)="feeling = !feeling">
         <span class="slider round"></span>
@@ -19,7 +19,7 @@
             </p>
           </li>
         </ul>
-        <img class="bulgaria" src="../../assets/bulgaria.png" alt="" width="180" height="90" (click)="gameService.setActive()">
+        <img class="bulgaria" src="../../assets/bulgaria.png" alt="" width="180" height="90" (click)="flagClicked()">
       </div>
     </div>
   </div>

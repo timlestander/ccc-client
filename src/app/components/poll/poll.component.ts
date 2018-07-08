@@ -45,11 +45,6 @@ export class PollComponent implements OnInit {
   };
   margin: [0, 0, 0, 0];
 
-  @HostListener('window:resize')
-  public onResize(): void {
-    this.view = [window.innerWidth, window.innerWidth];
-  }
-
   constructor(
     private apiService: ApiService,
     private authService: AuthService,
