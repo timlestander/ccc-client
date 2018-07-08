@@ -57,6 +57,9 @@ button {
     text-transform: uppercase;
     margin-top: 10px;
     outline: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 button:disabled {
     background: #ccc;
