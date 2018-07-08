@@ -57,9 +57,9 @@ export class AuthService {
       })
       .pipe(
         tap((response: any) => {
-          if (response.success && response.data.token) {
-            this.user = jwt_decode(response.data.token);
-            this.setToken(response.data.token);
+          if (response.success && response.data) {
+            this.user = jwt_decode(response.data);
+            this.setToken(response.data);
           }
         })
       );
