@@ -1,5 +1,5 @@
 import { Component, AfterViewInit, Input, OnDestroy } from '@angular/core';
-import Winwheel from 'Winwheel';
+import Winwheel from 'winwheel';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { GameService } from '../../services/game.service';
