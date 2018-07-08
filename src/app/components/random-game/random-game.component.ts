@@ -9,7 +9,7 @@ import { GameService } from '../../services/game.service';
 export class RandomGameComponent implements OnInit {
   @Input() public gameWinner: string;
 
-  constructor(private gameService: GameService) {}
+  constructor(public gameService: GameService) {}
 
   ngOnInit() {}
 }

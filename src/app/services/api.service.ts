@@ -5,13 +5,14 @@ import { UserInterface } from '../interfaces/user.interface';
 import { OptionInterface } from '../interfaces/option.interface';
 import { PollInterface } from '../interfaces/poll.interface';
 import { VoteInterface } from '../interfaces/vote.interface';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
   //Change localhost to ip client is hosted on e.g., ng serve --host 192.168.1.38
-  private BASE_URL: string = 'http://localhost:3000';
+  private BASE_URL: string = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 

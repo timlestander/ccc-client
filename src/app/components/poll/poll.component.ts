@@ -63,7 +63,6 @@ export class PollComponent implements OnInit {
         this.poll = poll;
         this.extractVotes(poll);
         this.hasVoted = this.setVotedStatus(poll);
-        console.log(this.setVotedStatus(poll));
       },
       (error: any) => {
         console.log(error);
@@ -102,6 +101,7 @@ export class PollComponent implements OnInit {
   public calculateValue(votes: VoteInterface[]): number {
     let total: number = 0;
     votes.forEach((vote: VoteInterface) => {
+      console.log(vote.ok);
       total += vote.ok * 1;
     });
     return total;
