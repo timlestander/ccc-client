@@ -136,8 +136,9 @@ export class RandomGameComponent implements AfterViewInit, OnDestroy {
     this.wheel.segments[this.winningNumber].fillStyle = this.winningColor;
     this.winningPerson = '';
     this.wheel.draw();                // Call draw to render changes to the wheel.
-    this.wheelSpinning = false; 
+    this.wheelSpinning = false;
     this.wheelFinished = false;         // Reset to false to power buttons and spin can be clicked again.
+    this.startSpin();
   }
 
   closeWheel() {
