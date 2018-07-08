@@ -16,6 +16,9 @@ import { ToastComponent } from './components/toast/toast.component';
 import { PollComponent } from './components/poll/poll.component';
 import { CreatePollComponent } from './components/create-poll/create-poll.component';
 import { NavComponent } from './components/nav/nav.component';
+import { PollListComponent } from './components/poll-list/poll-list.component';
+import { UpdateUserComponent } from './components/update-user/update-user.component';
+import { RandomGameComponent } from './components/random-game/random-game.component';
 
 // Services
 import { AuthService } from './services/auth.service';

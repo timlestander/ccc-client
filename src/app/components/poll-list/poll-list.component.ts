@@ -5,6 +5,7 @@ import { OptionInterface } from '../../interfaces/option.interface';
 import { VoteInterface } from '../../interfaces/vote.interface';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-poll-list',
@@ -18,12 +19,17 @@ export class PollListComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private toastService: ToastService
   ) {}
 
   ngOnInit() {
-    this.apiService.getAllPolls().subscribe((polls: PollInterface[]) => {
-      this.extractData(polls);
+    this.apiService.getAllPolls().subscribe((response: any) => {
+      if (response.success) {
+        this.extractData(response.data);
+      } else {
+        this.toastService.addDefaultError();
+      }
     });
   }
 

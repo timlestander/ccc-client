@@ -41,6 +41,7 @@
         .vote-count {
           border-radius: 10px;
           padding: 0px 10px;
+          flex: 1 0 40px;
           color: rgb(65, 138, 208);
           text-align: right;
           align-content: right;
@@ -49,6 +50,16 @@
             margin-left: 5px;
           }
         }
+      }
+    }
+
+    p {
+      text-align: center;
+      color: #fff;
+      font-size: 1.3rem;
+
+      a {
+        color: lightcoral;
       }
     }
   }

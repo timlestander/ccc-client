@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { VoteInterface } from '../../interfaces/vote.interface';
 import { OptionInterface } from '../../interfaces/option.interface';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-poll',
@@ -12,20 +13,35 @@ import { OptionInterface } from '../../interfaces/option.interface';
   styleUrls: ['./poll.component.scss']
 })
 export class PollComponent implements OnInit {
+  @HostListener('window:resize')
+  public onResize(): void {
+    this.view = [window.innerWidth - 96, window.innerWidth - 120];
+  }
+
   public poll: PollInterface;
   public pollId: number;
   public hasVoted: boolean;
   public graphData: any[] = [];
 
   // Graph settings
-  view = [window.innerWidth - 48, window.innerWidth - 60];
+  view = [window.innerWidth - 96, window.innerWidth - 120];
   autoScale = false;
   showLegend = false;
   showLabels = false;
-  explodeSlices = false;
+  explodeSlices = true;
   doughnut = false;
   colorScheme = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+    domain: [
+      'rgb(225, 151, 76)',
+      'rgb(132, 186, 91)',
+      'rgb(211, 94, 95)',
+      'rgb(128, 133, 133)',
+      'rgb(144, 103, 167)',
+      'rgb(171, 104, 87)',
+      'rgb(204, 194, 16)',
+      'rgb(0, 0, 0)',
+      'rgb(255, 255, 255)'
+    ]
   };
   margin: [0, 0, 0, 0];
 
@@ -37,7 +53,8 @@ export class PollComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private authService: AuthService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private toastService: ToastService
   ) {}
 
   ngOnInit() {
@@ -48,17 +65,15 @@ export class PollComponent implements OnInit {
   }
 
   public fetchData(pollId: number): void {
-    this.apiService.getPollById(pollId).subscribe(
-      (poll: PollInterface) => {
-        this.poll = poll;
-        this.extractVotes(poll);
-        this.hasVoted = this.setVotedStatus(poll);
-        console.log(this.setVotedStatus(poll));
-      },
-      (error: any) => {
-        console.log(error);
+    this.apiService.getPollById(pollId).subscribe((response: any) => {
+      if (response.success) {
+        this.poll = response.data;
+        this.extractVotes(this.poll);
+        this.hasVoted = this.setVotedStatus(this.poll);
+      } else {
+        this.toastService.addDefaultError();
       }
-    );
+    });
   }
 
   public submitVote(option: OptionInterface): void {
@@ -67,16 +82,13 @@ export class PollComponent implements OnInit {
       optionId: option.id,
       ok: this.authService.user.ok
     };
-    this.apiService.submitVote(values).subscribe(
-      (response: any) => {
-        if (response.success) {
-          this.fetchData(this.pollId);
-        }
-      },
-      (error: any) => {
-        console.log(error);
+    this.apiService.submitVote(values).subscribe((response: any) => {
+      if (response.success) {
+        this.fetchData(this.pollId);
+      } else {
+        this.toastService.addDefaultError();
       }
-    );
+    });
   }
 
   public extractVotes(poll: PollInterface): void {

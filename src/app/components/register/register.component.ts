@@ -27,14 +27,21 @@ export class RegisterComponent implements OnInit {
   }
 
   public onSubmit(values: any): void {
-    console.log(values);
-    this.authService.register(values).subscribe((result: any) => {
-      if (result.success) {
-        this.router.navigateByUrl('/');
-      } else {
-        this.toastService.addToast('error', result.title, result.message);
-      }
-    });
+    if (values.password === values.password2) {
+      this.authService.register(values).subscribe((result: any) => {
+        if (result.success) {
+          this.router.navigateByUrl('/');
+        } else {
+          this.toastService.addToast('error', result.title, result.message);
+        }
+      });
+    } else {
+      this.toastService.addToast(
+        'error',
+        'Registrering misslyckades',
+        'Lösenorden stämmer inte överens'
+      );
+    }
   }
 
   ngOnInit() {}

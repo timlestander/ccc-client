@@ -5,6 +5,7 @@ import { UserInterface } from '../interfaces/user.interface';
 import { OptionInterface } from '../interfaces/option.interface';
 import { PollInterface } from '../interfaces/poll.interface';
 import { VoteInterface } from '../interfaces/vote.interface';
+import { environment } from '../../environments/environment';
 
 export const BASE_URL: string = 'http://159.65.201.78:3000';
 
@@ -39,7 +40,6 @@ export class ApiService {
     poll: PollInterface,
     options: OptionInterface[]
   ): Observable<any> {
-    console.log(options);
     return this.http.post(`${BASE_URL}/poll`, { poll, options });
   }
 }

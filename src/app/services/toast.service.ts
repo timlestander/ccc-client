@@ -21,4 +21,13 @@ export class ToastService {
   public getToasts(): Subject<ToastInterface> {
     return this.toasts;
   }
+
+  public addDefaultError(): void {
+    this.toasts.next({
+      type: 'error',
+      title: 'Serverfel',
+      message:
+        'Något gick fel på serversidan. Försök igen. Fungerar det inte testa att logga ut och in.'
+    });
+  }
 }

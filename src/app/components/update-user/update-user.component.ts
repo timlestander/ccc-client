@@ -24,8 +24,12 @@ export class UpdateUserComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.apiService.getAllUsers().subscribe((users: UserInterface[]) => {
-      this.initForm(users);
+    this.apiService.getAllUsers().subscribe((response: any) => {
+      if (response.success) {
+        this.initForm(response.data);
+      } else {
+        this.toastService.addDefaultError();
+      }
     });
   }
 
@@ -34,7 +38,7 @@ export class UpdateUserComponent implements OnInit {
     users.forEach((user: UserInterface) => {
       controls.push(
         new FormGroup({
-          hh: new FormControl(false, Validators.required),
+          hh: new FormControl(user.hh, Validators.required),
           name: new FormControl(
             { value: user.name, disabled: true },
             Validators.required

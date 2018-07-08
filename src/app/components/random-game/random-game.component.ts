@@ -193,5 +193,4 @@ export class RandomGameComponent implements AfterViewInit, OnDestroy {
     clearTimeout(this.endTimer);
     this.unsubscribe$.next();
   }
-
 }

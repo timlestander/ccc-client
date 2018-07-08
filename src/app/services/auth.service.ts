@@ -6,17 +6,19 @@ import { map, tap } from 'rxjs/operators';
 import * as jwt_decode from 'jwt-decode';
 import { UserInterface } from '../interfaces/user.interface';
 import { BASE_URL } from './api.service';
+import { debug } from 'util';
+import { environment } from '../../environments/environment';
 
 export const TOKEN_NAME: string = 'token';
 
 @Injectable()
 export class AuthService {
+  
   public user: UserInterface;
 
   constructor(private http: HttpClient, private router: Router) {
     if (!this.isTokenExpired()) {
       this.user = jwt_decode(this.getToken());
-      // console.log(this.user);
     } else {
       this.router.navigateByUrl('/login');
     }
@@ -54,9 +56,9 @@ export class AuthService {
       })
       .pipe(
         tap((response: any) => {
-          if (response.success && response.data.token) {
-            this.user = jwt_decode(response.data.token);
-            this.setToken(response.data.token);
+          if (response.success && response.data) {
+            this.user = jwt_decode(response.data);
+            this.setToken(response.data);
           }
         })
       );

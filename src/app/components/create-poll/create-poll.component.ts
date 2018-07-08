@@ -66,16 +66,10 @@ export class CreatePollComponent implements OnInit, OnDestroy {
             'Allting gick enligt planen. Nu kan du slänga iväg en röst'
           );
           this.router.navigateByUrl('/polls');
+        } else {
+          this.toastService.addDefaultError();
         }
-      },
-      (error: any) => {
-        this.toastService.addToast(
-          'error',
-          'Någonting gick fel',
-          'Det är högst oklart vad som gick fel. Men det finns läge att oroa sig.'
-        );
-      }
-    );
+      });
   }
 
   ngOnInit() {}

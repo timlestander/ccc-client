@@ -1,6 +1,5 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { ApiService } from '../../services/api.service';
-import { GameService } from '../../services/game.service';
 import { Router } from '@angular/router';
 import { UserInterface } from '../../interfaces/user.interface';
 import { PollInterface } from '../../interfaces/poll.interface';
@@ -15,41 +14,33 @@ import { ToastService } from '../../services/toast.service';
 export class OverviewComponent implements OnInit {
   public users: UserInterface[];
   public clickTimer: any;
-  public clicks: number = 0;
 
-  public get feeling(): boolean { return this._feeling; }
-  public set feeling(value: boolean) {
-    this._feeling = value;
-    this.gameService.setFeeling(value);
-  }
-  private _feeling: boolean = false;
-
-  constructor(private apiService: ApiService, private router: Router, public gameService: GameService) { }
+  constructor(
+    private apiService: ApiService,
+    private router: Router,
+    private gameService: GameService,
+    private toastService: ToastService
+  ) {}
 
   ngOnInit() {
     this.apiService.getAllUsers().subscribe((response: any) => {
       if (response.success) {
         this.users = response.data;
       } else {
-        console.log('hwat');
         this.toastService.addDefaultError();
       }
     });
   }
 
-  public flagClicked(): void {
-    clearTimeout(this.clickTimer);
-    this.clicks++;
-    this.clickTimer = setTimeout(() => {
-      this.clicks = 0;
-    }, 300);
-    if (this.clicks === 3) {
-      this.startRandomGame();
-    }
-  }
+  public flagClicked(): void {}
 
   public startRandomGame(): void {
     let idx: number = Math.floor(Math.random() * this.users.length);
     this.gameService.startGame(this.users[idx].name);
   }
+
+  /*public drawCircle() {
+    const footer = document.querySelector('ul');
+    footer.setAttribute('class', 'circle-container');
+  }*/
 }

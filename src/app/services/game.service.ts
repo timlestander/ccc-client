@@ -4,7 +4,6 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class GameService {
-
   private gameServiceActive: boolean = false;
   private feeling: boolean = false;
 
