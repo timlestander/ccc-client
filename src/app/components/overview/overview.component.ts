@@ -40,13 +40,8 @@ export class OverviewComponent implements OnInit {
       this.clicks = 0;
     }, 300);
     if (this.clicks === 3) {
-      this.startRandomGame();
+      this.gameService.setActive(this.users);
     }
-  }
-
-  public startRandomGame(): void {
-    let idx: number = Math.floor(Math.random() * this.users.length);
-    this.gameService.setActive();
   }
 
   /*public drawCircle() {

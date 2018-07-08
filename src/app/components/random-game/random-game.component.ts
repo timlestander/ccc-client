@@ -1,8 +1,9 @@
 import { Component, AfterViewInit, Input, OnDestroy } from '@angular/core';
 import Winwheel from 'winwheel';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { GameService } from '../../services/game.service';
+import { UserInterface } from '../../interfaces/user.interface';
 
 @Component({
   selector: 'app-random-game',
@@ -24,7 +25,7 @@ export class RandomGameComponent implements AfterViewInit, OnDestroy {
   resetText = 'Trotsa bödeln!';
   message = 'Den bödeln utser är:';
 
-  @Input() users: any;
+  @Input() users: Observable<any>;
   numOfUsers: number;
 
   @Input()
@@ -36,53 +37,55 @@ export class RandomGameComponent implements AfterViewInit, OnDestroy {
       this.numOfSpins = 1;
     }
   }
-  public get elimination(): boolean { return this._elimination; }
+  public get elimination(): boolean {
+    return this._elimination;
+  }
   private _elimination: boolean = false;
 
   winningPerson: string = '';
   winningNumber: number;
   winningColor: any;
 
-  constructor(private gameService: GameService) {
-  }
+  constructor(private gameService: GameService) {}
 
   ngAfterViewInit() {
     // this.initWheel();
-    this.users.pipe(takeUntil(this.unsubscribe$)).subscribe(users => {
+    this.users.pipe(takeUntil(this.unsubscribe$)).subscribe(response => {
+      const users = response.data;
       const length = users.length;
       const segments = this.getSegments(users);
       this.numOfUsers = length;
 
       this.initWheel({
-        'numOfUsers': length,
-        'segments': segments
+        numOfUsers: length,
+        segments: segments
       });
     });
   }
 
   initWheel(userData) {
     this.wheel = new Winwheel({
-      'canvasId'        : 'spinwheel',
-      'outerRadius'     : 150,
-      'textFontSize'    : 18,
-      'textAlignment'   : 'outer',
-      'numSegments'     : userData.numOfUsers,
-      'lineWidth'   : 3,
-      'pointerAngle': 40,
-      'segments': userData.segments,
-      'textFillStyle': '#ffffff',
-      'strokeStyle': '#ffffff',
-      'pointerGuide' :        // Turn pointer guide on.
-      {
-          'display'     : true,
-          'strokeStyle' : 'rgba(0,0,0,0.2)',
-          'lineWidth'   : 3
+      canvasId: 'spinwheel',
+      outerRadius: 150,
+      textFontSize: 18,
+      textAlignment: 'outer',
+      numSegments: userData.numOfUsers,
+      lineWidth: 3,
+      pointerAngle: 40,
+      segments: userData.segments,
+      textFillStyle: '#ffffff',
+      strokeStyle: '#ffffff',
+      // Turn pointer guide on.
+      pointerGuide: {
+        display: true,
+        strokeStyle: 'rgba(0,0,0,0.2)',
+        lineWidth: 3
       },
-      'animation':           // Define spin to stop animation.
-      {
-        'type': 'spinToStop',
-        'duration': this.spinSpeed,
-        'spins': this.numOfSpins,
+      // Define spin to stop animation.
+      animation: {
+        type: 'spinToStop',
+        duration: this.spinSpeed,
+        spins: this.numOfSpins
       }
     });
   }
@@ -92,7 +95,9 @@ export class RandomGameComponent implements AfterViewInit, OnDestroy {
     handImage.src = '../../../assets/pointing_hand.png';
 
     handImage.onload = function() {
-      const wheelCanvas = <HTMLCanvasElement> document.getElementById('spinwheel');
+      const wheelCanvas = <HTMLCanvasElement>(
+        document.getElementById('spinwheel')
+      );
       const ctx = wheelCanvas.getContext('2d');
       if (ctx) {
         ctx.drawImage(handImage, 255, 100, 100, 50);
@@ -121,7 +126,10 @@ export class RandomGameComponent implements AfterViewInit, OnDestroy {
 
     const array = [];
     users.forEach((user, index) => {
-      array.push({'fillStyle': getRandomColor(index), 'text': user.username});
+      array.push({
+        fillStyle: getRandomColor(index),
+        text: user.username.substring(0, 10)
+      });
     });
     return array;
   }
@@ -170,17 +178,17 @@ export class RandomGameComponent implements AfterViewInit, OnDestroy {
   // Function for reset button.
   // -------------------------------------------------------
   resetWheel() {
-    this.wheel.stopAnimation(false);  // Stop the animation, false as param so does not call callback function.
-    this.wheel.rotationAngle = 0;     // Re-set the wheel angle to 0 degrees.
+    this.wheel.stopAnimation(false); // Stop the animation, false as param so does not call callback function.
+    this.wheel.rotationAngle = 0; // Re-set the wheel angle to 0 degrees.
     this.wheel.segments[this.winningNumber].fillStyle = this.winningColor;
     if (this.elimination) {
       this.wheel.deleteSegment(this.winningNumber);
       this.numOfUsers--;
     }
     this.winningPerson = '';
-    this.wheel.draw();                // Call draw to render changes to the wheel.
+    this.wheel.draw(); // Call draw to render changes to the wheel.
     this.wheelSpinning = false;
-    this.wheelFinished = false;         // Reset to false to power buttons and spin can be clicked again.
+    this.wheelFinished = false; // Reset to false to power buttons and spin can be clicked again.
     this.startSpin();
   }
 
