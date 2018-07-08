@@ -1,21 +1,25 @@
 <div class="vote-wrapper">
   <div *ngIf="poll && !hasVoted" class="question-wrapper">
-    <h1>{{ poll.question }}</h1>
+    <h3>{{ poll.question }}</h3>
     <div class="option" *ngFor="let option of poll.options" (click)="submitVote(option)">
       {{ option.text }}
     </div>
   </div>
 
   <div class="result-wrapper" *ngIf="graphData.length > 0 && poll && hasVoted">
-    <h1>{{ poll.question }} </h1>
+    <h3>{{ poll.question }} </h3>
     <div class="chart-labels">
       <div class="label" *ngFor="let option of graphData; let i=index">
         <span class="color" [ngStyle]="{'background': colorScheme.domain[i] }"></span>
         <span class="text">{{ option.name }}</span>
       </div>
     </div>
-    <ngx-charts-pie-chart [view]="view" [scheme]="colorScheme" [results]=" graphData " [legend]="showLegend" [explodeSlices]="explodeSlices "
-      [labels]="showLabels" [doughnut]="doughnut" [gradient]="gradient">
-    </ngx-charts-pie-chart>
+    <div class="chart-holder">
+      <div id="pie-chart-parent">
+        <ngx-charts-pie-chart [scheme]="colorScheme" [results]=" graphData " [legend]="showLegend" [explodeSlices]="explodeSlices "
+          [labels]="showLabels" [doughnut]="doughnut">
+        </ngx-charts-pie-chart>
+      </div>
+    </div>
   </div>
 </div>

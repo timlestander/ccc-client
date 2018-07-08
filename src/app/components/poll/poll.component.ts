@@ -7,23 +7,18 @@ import { VoteInterface } from '../../interfaces/vote.interface';
 import { OptionInterface } from '../../interfaces/option.interface';
 
 @Component({
-  selector: 'poll',
+  selector: 'app-poll',
   templateUrl: './poll.component.html',
   styleUrls: ['./poll.component.scss']
 })
 export class PollComponent implements OnInit {
-  @HostListener('window:resize')
-  public onResize(): void {
-    this.view = [window.innerWidth, window.innerWidth];
-  }
-
   public poll: PollInterface;
   public pollId: number;
   public hasVoted: boolean;
   public graphData: any[] = [];
 
   // Graph settings
-  view = [window.innerWidth, window.innerWidth];
+  view = [window.innerWidth - 48, window.innerWidth - 60];
   autoScale = false;
   showLegend = false;
   showLabels = false;
@@ -34,6 +29,11 @@ export class PollComponent implements OnInit {
   };
   margin: [0, 0, 0, 0];
 
+  @HostListener('window:resize')
+  public onResize(): void {
+    this.view = [window.innerWidth, window.innerWidth];
+  }
+
   constructor(
     private apiService: ApiService,
     private authService: AuthService,
@@ -42,7 +42,7 @@ export class PollComponent implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      this.pollId = parseInt(params.get('id'));
+      this.pollId = parseInt(params.get('id'), 10);
       this.fetchData(this.pollId);
     });
   }
@@ -62,7 +62,7 @@ export class PollComponent implements OnInit {
   }
 
   public submitVote(option: OptionInterface): void {
-    let values: VoteInterface = {
+    const values: VoteInterface = {
       userId: this.authService.user.id,
       optionId: option.id,
       ok: this.authService.user.ok

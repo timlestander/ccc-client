@@ -1,4 +1,5 @@
 .list-wrapper {
+  padding-bottom: 84px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -12,7 +13,9 @@
   }
 
   .list-group {
-    width: 90%;
+    width: 100%;
+    border-radius: 7px;
+    overflow: hidden;
     .poll-group {
       .poll {
         background: #fff;
@@ -22,11 +25,11 @@
         flex-wrap: nowrap;
         font-family: 'Roboto';
 
-        &:first-of-type {
+        &:first-of-type:not(:last-of-type) {
           border-radius: 7px 7px 0 0;
         }
 
-        &:last-of-type {
+        &:last-of-type:not(:first-of-type) {
           border-radius: 0 0 7px 7px;
         }
         .question {
@@ -38,7 +41,6 @@
         .vote-count {
           border-radius: 10px;
           padding: 0px 10px;
-          flex: 1;
           color: rgb(65, 138, 208);
           text-align: right;
           align-content: right;

@@ -6,6 +6,7 @@
     "start": "ng serve",
     "server": "node server/index.js",
     "build": "ng build",
+    "build-server": "ng build --prod --output-path ../../var/www/html/proddbygge/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

@@ -38,9 +38,4 @@ export class OverviewComponent implements OnInit {
   public goToPoll(id: number): void {
     this.router.navigateByUrl(`/poll/${id}`);
   }
-
-  /*public drawCircle() {
-    const footer = document.querySelector('ul');
-    footer.setAttribute('class', 'circle-container');
-  }*/
 }

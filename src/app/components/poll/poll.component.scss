@@ -4,21 +4,51 @@
     text-align: center;
   }
 
+  h3 {
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'Roboto', 'Arial';
+    font-weight: 900;
+    letter-spacing: 1px;
+    color: #fff;
+  }
+
   .question-wrapper {
     .option {
-      padding: 5px 10px;
+      padding: 10px 10px;
       margin-bottom: 10px;
-      font-size: 1.2rem;
+      font-size: 16px;
+      color: #fff;
+      font-weight: 500;
       background: lightcoral;
+
+      &:first-of-type {
+        margin-top: 30px;
+      }
     }
   }
 
   .result-wrapper {
+    .chart-holder {
+      display: flex;
+      justify-content: center;
+      height: 100%;
+    }
+    #pie-chart-parent {
+      width: 100%;
+      min-width: 300px;
+      max-width: 500px;
+      height: 100%;
+      min-height: 300px;
+      max-height: 500px;
+    }
+
     .chart-labels {
       display: flex;
       justify-content: space-around;
       flex-wrap: wrap;
-      margin-bottom: 20px;
+      margin-top: 20px;
+      margin-bottom: 10px;
     }
 
     .label {

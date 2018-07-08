@@ -29,7 +29,7 @@ export class CreatePollComponent implements OnInit {
   }
 
   public addOption(): void {
-    let control = this.pollForm.controls['options'] as FormArray;
+    const control = this.pollForm.controls['options'] as FormArray;
     control.push(
       new FormGroup({
         text: new FormControl('', Validators.required)
@@ -42,11 +42,11 @@ export class CreatePollComponent implements OnInit {
   }
 
   public submitPoll(values: any): void {
-    let optionsData: OptionInterface[] = [];
+    const optionsData: OptionInterface[] = [];
     values.options.forEach((option: any) => {
       optionsData.push({ text: option.text });
     });
-    let pollData: PollInterface = {
+    const pollData: PollInterface = {
       question: values.question,
       userId: this.authService.user.id
     };
