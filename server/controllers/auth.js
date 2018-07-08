@@ -1,42 +1,66 @@
 const config = require('../config');
 const jwt = require('jsonwebtoken');
-// const bcrypt = require('bcrypt-nodejs');
+const bcrypt = require('bcryptjs');
 const authService = require('../services/auth');
 const userService = require('../services/user');
+const asyncErrorHandler = require('../middlewares/async').asyncError;
 
-function login(req, res) {
-  return authService
-    .authenticate(req.body)
-    .then(token => {
-      res.send({
-        success: true,
-        data: { token }
-      });
-    })
-    .catch(err => {
-      res.send({
-        success: false,
-        message: err.message // Improve error handling
-      });
+const login = asyncErrorHandler(async (req, res, next) => {
+  const user = await userService.getUserByUsername(req.body.username);
+
+  if (!user) {
+    res.send({
+      success: false,
+      title: 'Inloggningen misslyckades.',
+      message: 'Det finns ingen användare med detta namn.'
     });
-}
+  } else if (!bcrypt.compareSync(req.body.password, user.password)) {
+    res.send({
+      success: false,
+      title: 'Inloggningen misslyckades',
+      message: 'Lösenordet stämmer inte.'
+    });
+  } else {
+    const payload = {
+      username: user.username,
+      id: user.id,
+      name: user.name,
+      ok: user.ok,
+      hh: user.hh
+    };
 
-function register(req, res) {
-  return userService.getUserByUsername(req.body.username || '').then(exists => {
-    if (exists) {
-      return res.send({
-        success: false,
-        message: 'Registration failed. User with this username already exists.'
-      });
-    }
+    var token = jwt.sign(payload, config.jwtSecret, {
+      expiresIn: config.tokenExpireTime
+    });
+
+    res.send({
+      success: true,
+      data: token
+    });
+  }
+});
+
+const register = asyncErrorHandler(async (req, res, next) => {
+  const exists = await userService.getUserByUsername(req.body.username);
+  if (exists) {
+    res.send({
+      success: false,
+      title: 'Registreringen misslyckades',
+      message: 'En användare med detta användarnamn finns redan.'
+    });
+  } else {
     let user = req.body;
-    return userService
-      .addUser(user)
-      .then(() =>
-        res.send({ success: true, message: 'User successfully created.' })
-      );
-  });
-}
+    const hashedPassword = bcrypt.hashSync(user.password, config.saltRounds);
+    user.password = hashedPassword;
+    await userService.addUser(user);
+
+    res.send({
+      success: true,
+      title: 'Registreringen lyckades',
+      message: 'Din användare är skapad. Varsågod att logga in, bitch.'
+    });
+  }
+});
 
 module.exports = {
   login,

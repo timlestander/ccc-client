@@ -23,7 +23,8 @@ const updateUser = async users => {
 const getUserByUsername = async username => {
   const user = await Users.findOne({
     where: { username },
-    attributes: ['id', 'name', 'username']
+    raw: true,
+    attributes: ['id', 'name', 'username', 'hh', 'ok', 'password']
   });
 
   return user;
