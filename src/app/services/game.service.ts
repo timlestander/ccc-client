@@ -1,19 +1,29 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameService {
-  public gameStatus: Subject<string> = new Subject<string>();
+  private gameServiceActive: boolean = false;
+  private feeling: boolean = false;
 
-  constructor() {}
-
-  public startGame(winner): void {
-    this.gameStatus.next(winner);
+  getGameStatus() {
+    return this.gameServiceActive;
   }
 
-  public endGame(): void {
-    this.gameStatus.next(null);
+  setActive() {
+    this.gameServiceActive = true;
+  }
+
+  closeGame() {
+    this.gameServiceActive = false;
+  }
+
+  getFeeling() {
+    return this.feeling;
+  }
+
+  setFeeling(value) {
+    this.feeling = value;
   }
 }

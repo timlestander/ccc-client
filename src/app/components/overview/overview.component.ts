@@ -1,5 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { ApiService } from '../../services/api.service';
+import { GameService } from '../../services/game.service';
 import { Router } from '@angular/router';
 import { UserInterface } from '../../interfaces/user.interface';
 import { PollInterface } from '../../interfaces/poll.interface';
@@ -16,12 +17,14 @@ export class OverviewComponent implements OnInit {
   public clickTimer: any;
   public clicks: number = 0;
 
-  constructor(
-    private apiService: ApiService,
-    private router: Router,
-    private gameService: GameService,
-    private toastService: ToastService
-  ) {}
+  public get feeling(): boolean { return this._feeling; }
+  public set feeling(value: boolean) {
+    this._feeling = value;
+    this.gameService.setFeeling(value);
+  }
+  private _feeling: boolean = false;
+
+  constructor(private apiService: ApiService, private router: Router, public gameService: GameService) { }
 
   ngOnInit() {
     this.apiService.getAllUsers().subscribe((response: any) => {
@@ -49,9 +52,4 @@ export class OverviewComponent implements OnInit {
     let idx: number = Math.floor(Math.random() * this.users.length);
     this.gameService.startGame(this.users[idx].name);
   }
-
-  /*public drawCircle() {
-    const footer = document.querySelector('ul');
-    footer.setAttribute('class', 'circle-container');
-  }*/
 }

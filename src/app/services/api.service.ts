@@ -7,39 +7,39 @@ import { PollInterface } from '../interfaces/poll.interface';
 import { VoteInterface } from '../interfaces/vote.interface';
 import { environment } from '../../environments/environment';
 
+export const BASE_URL: string = 'http://159.65.201.78:3000';
+
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-  //Change localhost to ip client is hosted on e.g., ng serve --host 192.168.1.38
-  private BASE_URL: string = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 
   public getAllUsers(): Observable<UserInterface[]> {
-    return this.http.get<UserInterface[]>(`${this.BASE_URL}/users`);
+    return this.http.get<UserInterface[]>(`${BASE_URL}/users`);
   }
 
   public getAllPolls(): Observable<PollInterface[]> {
-    return this.http.get<PollInterface[]>(`${this.BASE_URL}/polls`);
+    return this.http.get<PollInterface[]>(`${BASE_URL}/polls`);
   }
 
   public getPollById(id: number): Observable<PollInterface> {
-    return this.http.get<PollInterface>(`${this.BASE_URL}/poll/${id}`);
+    return this.http.get<PollInterface>(`${BASE_URL}/poll/${id}`);
   }
 
   public submitVote(vote: VoteInterface): Observable<any> {
-    return this.http.post(`${this.BASE_URL}/vote`, vote);
+    return this.http.post(`${BASE_URL}/vote`, vote);
   }
 
   public updateUsers(users: any): Observable<any> {
-    return this.http.put(`${this.BASE_URL}/users`, users);
+    return this.http.put(`${BASE_URL}/users`, users);
   }
 
   public submitPoll(
     poll: PollInterface,
     options: OptionInterface[]
   ): Observable<any> {
-    return this.http.post(`${this.BASE_URL}/poll`, { poll, options });
+    return this.http.post(`${BASE_URL}/poll`, { poll, options });
   }
 }

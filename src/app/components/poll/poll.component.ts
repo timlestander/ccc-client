@@ -8,14 +8,14 @@ import { OptionInterface } from '../../interfaces/option.interface';
 import { ToastService } from '../../services/toast.service';
 
 @Component({
-  selector: 'poll',
+  selector: 'app-poll',
   templateUrl: './poll.component.html',
   styleUrls: ['./poll.component.scss']
 })
 export class PollComponent implements OnInit {
   @HostListener('window:resize')
   public onResize(): void {
-    this.view = [window.innerWidth - 120, window.innerWidth - 120];
+    this.view = [window.innerWidth - 96, window.innerWidth - 120];
   }
 
   public poll: PollInterface;
@@ -24,8 +24,8 @@ export class PollComponent implements OnInit {
   public graphData: any[] = [];
 
   // Graph settings
-  view = [window.innerWidth - 120, window.innerWidth - 120];
-  autoScale = true;
+  view = [window.innerWidth - 96, window.innerWidth - 120];
+  autoScale = false;
   showLegend = false;
   showLabels = false;
   explodeSlices = true;
@@ -45,6 +45,11 @@ export class PollComponent implements OnInit {
   };
   margin: [0, 0, 0, 0];
 
+  @HostListener('window:resize')
+  public onResize(): void {
+    this.view = [window.innerWidth, window.innerWidth];
+  }
+
   constructor(
     private apiService: ApiService,
     private authService: AuthService,
@@ -54,7 +59,7 @@ export class PollComponent implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      this.pollId = parseInt(params.get('id'));
+      this.pollId = parseInt(params.get('id'), 10);
       this.fetchData(this.pollId);
     });
   }
@@ -72,7 +77,7 @@ export class PollComponent implements OnInit {
   }
 
   public submitVote(option: OptionInterface): void {
-    let values: VoteInterface = {
+    const values: VoteInterface = {
       userId: this.authService.user.id,
       optionId: option.id,
       ok: this.authService.user.ok

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators'
 import { ApiService } from '../../services/api.service';
 import { AuthService } from '../../services/auth.service';
 import { Validators, FormGroup, FormArray, FormControl } from '@angular/forms';
@@ -12,8 +14,11 @@ import { Router } from '@angular/router';
   templateUrl: './create-poll.component.html',
   styleUrls: ['./create-poll.component.scss']
 })
-export class CreatePollComponent implements OnInit {
+export class CreatePollComponent implements OnInit, OnDestroy {
   public pollForm: FormGroup;
+
+  private unsubscribe$: Subject<void> = new Subject<void>();
+
   constructor(
     private apiService: ApiService,
     private authService: AuthService,
@@ -29,7 +34,7 @@ export class CreatePollComponent implements OnInit {
   }
 
   public addOption(): void {
-    let control = this.pollForm.controls['options'] as FormArray;
+    const control = this.pollForm.controls['options'] as FormArray;
     control.push(
       new FormGroup({
         text: new FormControl('', Validators.required)
@@ -42,17 +47,18 @@ export class CreatePollComponent implements OnInit {
   }
 
   public submitPoll(values: any): void {
-    let optionsData: OptionInterface[] = [];
+    const optionsData: OptionInterface[] = [];
     values.options.forEach((option: any) => {
       optionsData.push({ text: option.text });
     });
-    let pollData: PollInterface = {
+    const pollData: PollInterface = {
       question: values.question,
       userId: this.authService.user.id
     };
-    this.apiService
-      .submitPoll(pollData, optionsData)
-      .subscribe((response: any) => {
+    this.apiService.submitPoll(pollData, optionsData)
+    .pipe(takeUntil(this.unsubscribe$))
+    .subscribe(
+      (response: any) => {
         if (response.success) {
           this.toastService.addToast(
             'success',
@@ -67,4 +73,9 @@ export class CreatePollComponent implements OnInit {
   }
 
   ngOnInit() {}
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
 }

@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, tap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
-import * as jwt_decode from 'jwt-decode';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
+import * as jwt_decode from 'jwt-decode';
 import { UserInterface } from '../interfaces/user.interface';
+import { BASE_URL } from './api.service';
 import { debug } from 'util';
 import { environment } from '../../environments/environment';
 
@@ -12,9 +13,7 @@ export const TOKEN_NAME: string = 'token';
 
 @Injectable()
 export class AuthService {
-  //Change localhost to ip client is hosted on e.g., ng serve --host 192.168.1.38
-  private BASE_URL: string = environment.apiUrl;
-
+  
   public user: UserInterface;
 
   constructor(private http: HttpClient, private router: Router) {
@@ -35,23 +34,23 @@ export class AuthService {
 
   public getTokenExpirationDate(token: string): number {
     const decoded = jwt_decode(token);
-    if (decoded.exp === undefined) return null;
+    if (decoded.exp === undefined) { return null; }
     const date = new Date(0);
     return date.setUTCSeconds(decoded.utc);
   }
 
   public isTokenExpired(token?: string) {
-    if (!token) token = this.getToken();
-    if (!token) return true;
+    if (!token) { token = this.getToken(); }
+    if (!token) { return true; }
 
     const date = this.getTokenExpirationDate(token);
-    if (date === undefined) return true;
+    if (date === undefined) { return true; }
     return date.valueOf() > new Date().valueOf();
   }
 
   public login(username: string, password: string): Observable<any> {
     return this.http
-      .post(`${this.BASE_URL}/login`, {
+      .post(`${BASE_URL}/login`, {
         username,
         password
       })
@@ -66,7 +65,7 @@ export class AuthService {
   }
 
   public register(user: string): Observable<any> {
-    return this.http.post(`${this.BASE_URL}/register`, user);
+    return this.http.post(`${BASE_URL}/register`, user);
   }
 
   public logout(): void {

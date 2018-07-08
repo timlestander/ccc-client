@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../../services/api.service';
-import { UserInterface } from '../../interfaces/user.interface';
 import { Validators, FormGroup, FormArray, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ApiService } from '../../services/api.service';
 import { ToastService } from '../../services/toast.service';
+import { UserInterface } from '../../interfaces/user.interface';
 
 @Component({
   selector: 'app-update-user',
@@ -34,7 +34,7 @@ export class UpdateUserComponent implements OnInit {
   }
 
   public initForm(users: UserInterface[]): void {
-    let controls: FormArray = this.hhForm.controls['users'] as FormArray;
+    const controls: FormArray = this.hhForm.controls['users'] as FormArray;
     users.forEach((user: UserInterface) => {
       controls.push(
         new FormGroup({
@@ -57,8 +57,8 @@ export class UpdateUserComponent implements OnInit {
   public onSubmit(value: any): void {
     let hhCounter: number = 0;
     value.users.forEach((user: any) => {
-      if (user.ok > 5) user.ok = 5;
-      if (user.ok < 1) user.ok = 1;
+      if (user.ok > 5) { user.ok = 5; }
+      if (user.ok < 1) { user.ok = 1; }
       if (user.hh) {
         hhCounter++;
       }

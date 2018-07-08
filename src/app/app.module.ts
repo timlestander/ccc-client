@@ -1,11 +1,11 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Routes, RouterModule } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TokenInterceptor } from './interceptors/token.interceptor';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TokenInterceptor } from './interceptors/token.interceptor';
 
 // Components
 import { LoginComponent } from './components/login/login.component';
@@ -25,6 +25,10 @@ import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth.guard';
 import { ToastService } from './services/toast.service';
 import { ApiService } from './services/api.service';
+import { GameService } from './services/game.service';
+import { PollListComponent } from './components/poll-list/poll-list.component';
+import { UpdateUserComponent } from './components/update-user/update-user.component';
+import { RandomGameComponent } from './components/random-game/random-game.component';
 
 const appRoutes: Routes = [
   {
@@ -91,6 +95,7 @@ const appRoutes: Routes = [
     AuthGuard,
     ToastService,
     ApiService,
+    GameService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
