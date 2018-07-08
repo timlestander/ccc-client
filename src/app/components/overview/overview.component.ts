@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
+import { GameService } from '../../services/game.service';
 import { Router } from '@angular/router';
 import { UserInterface } from '../../interfaces/user.interface';
 import { PollInterface } from '../../interfaces/poll.interface';
@@ -13,7 +14,7 @@ export class OverviewComponent implements OnInit {
   public users: UserInterface[];
   public openPolls: PollInterface[];
 
-  constructor(private apiService: ApiService, private router: Router) { }
+  constructor(private apiService: ApiService, private router: Router, public gameService: GameService) { }
 
   ngOnInit() {
     this.apiService.getAllUsers().subscribe(

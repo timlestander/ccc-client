@@ -8,3 +8,5 @@
 <div class="footer">
   <app-nav></app-nav>
 </div>
+
+<app-random-game *ngIf="gameService.getGameStatus()" [users]="apiService.getAllUsers()"></app-random-game>

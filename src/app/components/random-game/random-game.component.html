@@ -1,0 +1,6 @@
+<div class="wrapper">
+  <h3>Den bödeln utser är: <br/> {{ winningPerson }}</h3>
+  <canvas id="spinwheel" height="400px" width="350px"></canvas>
+  <button *ngIf="!this.wheelFinished" (click)="startSpin()">Låt bödeln säga sitt!</button>
+  <button *ngIf="this.wheelFinished" (click)="closeWheel()">Avsluta</button>
+</div>

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators'
 import { ApiService } from '../../services/api.service';
 import { AuthService } from '../../services/auth.service';
 import { Validators, FormGroup, FormArray, FormControl } from '@angular/forms';
@@ -12,8 +14,11 @@ import { Router } from '@angular/router';
   templateUrl: './create-poll.component.html',
   styleUrls: ['./create-poll.component.scss']
 })
-export class CreatePollComponent implements OnInit {
+export class CreatePollComponent implements OnInit, OnDestroy {
   public pollForm: FormGroup;
+
+  private unsubscribe$: Subject<void> = new Subject<void>();
+
   constructor(
     private apiService: ApiService,
     private authService: AuthService,
@@ -50,7 +55,9 @@ export class CreatePollComponent implements OnInit {
       question: values.question,
       userId: this.authService.user.id
     };
-    this.apiService.submitPoll(pollData, optionsData).subscribe(
+    this.apiService.submitPoll(pollData, optionsData)
+    .pipe(takeUntil(this.unsubscribe$))
+    .subscribe(
       (response: any) => {
         if (response.success) {
           this.toastService.addToast(
@@ -72,4 +79,9 @@ export class CreatePollComponent implements OnInit {
   }
 
   ngOnInit() {}
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
 }
