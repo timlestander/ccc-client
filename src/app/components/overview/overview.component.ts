@@ -40,7 +40,7 @@ export class OverviewComponent implements OnInit {
       this.clicks = 0;
     }, 300);
     if (this.clicks === 3) {
-      this.gameService.setActive(this.users);
+      this.gameService.setActive();
     }
   }
 

@@ -12,14 +12,17 @@
       <div class="rotate-circle">
         <ul class='circle-container'>
           <li *ngFor="let user of users">
-            <p>
-              <i *ngIf="user.hh" class="glyphicon glyph glyphicon-king">{{user.ok}}</i>
-              <i *ngIf="!user.hh" class="glyphicon glyph glyphicon-pawn">{{user.ok}}</i>
-              {{user.username}}
-            </p>
+            <div class="user-entry">
+              <img class="hh-image" *ngIf="user.hh" src="../../assets/hh.png" />
+              <img class="ok-image" *ngIf="user.ok" src="../../assets/ok-{{user.ok}}.png" />
+              <!-- <i *ngIf="user.hh " class="glyphicon glyph glyphicon-king ">{{user.ok}}</i>
+              <i *ngIf="!user.hh " class="glyphicon glyph glyphicon-pawn ">{{user.ok}}</i> -->
+              <div class="ok" *ngIf="user.ok">{{ user.ok }}</div>
+              <div class="username">{{user.username}}</div>
+            </div>
           </li>
         </ul>
-        <img class="bulgaria" src="../../assets/bulgaria.png" alt="" width="180" height="90" (click)="flagClicked()">
+        <img class="bulgaria" src="../../assets/bulgaria.png" alt=" " width="180" height="90" (click)="flagClicked()">
       </div>
     </div>
   </div>
