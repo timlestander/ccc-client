@@ -1,7 +1,6 @@
 const config = require('../config');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const authService = require('../services/auth');
 const userService = require('../services/user');
 const asyncErrorHandler = require('../middlewares/async').asyncError;
 
