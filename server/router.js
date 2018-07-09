@@ -16,7 +16,7 @@ module.exports.set = app => {
     authMiddleware.checkAuth,
     userController.getUserById
   );
-  app.put('/api/users', userController.updateUser);
+  app.put('/api/users', userController.hhUpdate);
   app.get('/api/polls', authMiddleware.checkAuth, pollController.getAllPolls);
   app.post('/api/poll', authMiddleware.checkAuth, pollController.createPoll);
   app.get(
@@ -25,4 +25,5 @@ module.exports.set = app => {
     pollController.getPollById
   );
   app.post('/api/vote', authMiddleware.checkAuth, voteController.submitVote);
+  app.put('/api/user/:id', authMiddleware.checkAuth, userController.updateUser);
 };
