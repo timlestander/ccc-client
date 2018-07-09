@@ -40,12 +40,19 @@ export class OverviewComponent implements OnInit {
       this.clicks = 0;
     }, 300);
     if (this.clicks === 3) {
-      this.gameService.setActive(this.users);
+      this.gameService.setActive();
     }
   }
 
-  /*public drawCircle() {
-    const footer = document.querySelector('ul');
-    footer.setAttribute('class', 'circle-container');
-  }*/
+  public getPosition(item: number, length: number): Object {
+    const angle: number = (360 / length) * item;
+    const y: number = Math.sin((angle * Math.PI) / 180);
+    const x: number = Math.cos((angle * Math.PI) / 180);
+
+    return {
+      position: 'relative',
+      top: y * 130 + 'px',
+      left: x * 130 + 'px'
+    };
+  }
 }

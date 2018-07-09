@@ -1,73 +1,13 @@
-/// Mixin to put items on a circle
-/// [1] - Allows children to be absolutely positioned
-/// [2] - Allows the mixin to be used on a list
-/// [3] - In case box-sizing: border-box has been enabled
-/// [4] - Allows any type of direct children to be targeted
-///
-/// @param {Integer} $nb-items - Number or items
-/// @param {Length} $circle-size - Container size
-/// @param {Length} $item-size - Item size
-/// @param {String | false} $class-for-IE - Base class name for old IE
-@mixin distribute-on-circle(
-  $nb-items,
-  $circle-size,
-  $item-size,
-  $class-for-IE: false
-) {
-  $half-item: ($item-size / 2);
-  $half-parent: ($circle-size / 2);
-
-  position: relative; /* 1 */
-  width: $circle-size;
-  height: $circle-size;
-  padding: 0;
-  border-radius: 50%;
-  list-style: none; /* 2 */
-  box-sizing: content-box; /* 3 */
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  > * {
-    /* 4 */
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: $item-size;
-    height: $item-size;
-    margin: -$half-item/2; //Dela med något nummer beroende på hur stort elementet ska vara
-  }
-
-  $angle: (360 / $nb-items);
-  $rot: 0;
-
-  @for $i from 1 through $nb-items {
-    @if not $class-for-IE {
-      > :nth-of-type(#{$i}) {
-        transform: rotate($rot * 1deg)
-          translate($half-parent)
-          rotate($rot * -1deg);
-      }
-    } @else {
-      > .#{$class-for-IE}#{$i} {
-        // If CSS transforms are not supported
-        $mt: sin($rot * pi() / 180) * $half-parent - $half-item;
-        $ml: cos($rot * pi() / 180) * $half-parent - $half-item;
-        margin: $mt 0 0 $ml;
-      }
-    }
-    $rot: ($rot + $angle);
-  }
-}
-
 .overview-wrapper {
   width: 100%;
   height: 100%;
   overflow: hidden;
+  padding-bottom: 50px;
+
   .members {
-    width: 100%;
-    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     h1 {
       text-align: center;
@@ -75,67 +15,77 @@
       font-family: 'Roboto', 'Arial';
       font-weight: 900;
       letter-spacing: 1px;
+      margin-top: 10px;
       color: #fff;
     }
 
     .circle-container {
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      -webkit-animation: spin 70s linear infinite;
+      -moz-animation: spin 70s linear infinite;
+      animation: spin 70s linear infinite;
+      margin-left: -50px;
 
-    .rotate-circle {
-      -webkit-animation: spin 50s linear infinite;
-      -moz-animation: spin 50s linear infinite;
-      animation: spin 50s linear infinite;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      height: 400px;
-      top: -120px;
+      .center-reference {
+        position: relative;
+        top: 130px;
+        left: 130px;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        .user-entry {
+          animation: spin 70s linear infinite reverse;
+          width: 0;
+          height: 0;
 
-      .circle-container {
-        @include distribute-on-circle(9, 20em, 40px, false);
-        margin: 5em auto 0;
-        margin-top: 0;
-        padding: 0;
-        border: solid 5px tomato;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: absolute;
+          .hh-image {
+            position: absolute;
+            width: 55px;
+            height: 35px;
+            top: -18px;
+          }
 
-        li {
-          color: white;
+          .ok-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+          }
 
-          p {
-            display: flex;
-            flex-flow: column wrap;
-            justify-content: center;
-            align-items: center;
-            animation: spin 50s linear infinite reverse;
+          .ok {
+            position: absolute;
+            right: -10px;
+            top: 28px;
+            text-align: center;
+            width: 20px;
+            border-radius: 50%;
+            height: 20px;
+            background: lightcoral;
+            color: #fff;
+          }
+
+          .username {
+            color: #fff;
+            font-family: 'Roboto';
           }
         }
       }
-
-      .bulgaria {
-        position: absolute;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        animation: spin 50s linear infinite reverse;
-      }
+    }
+    .bulgaria {
+      width: 100px;
+      height: 100px;
+      margin-top: -150px;
+      border-radius: 50%;
+      z-index: 1;
     }
   }
 }
 
-//@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
-//@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
 @keyframes spin {
   100% {
     -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
     transform: rotate(360deg);
   }
 }
@@ -145,8 +95,8 @@
   align-items: center;
   width: 100%;
   justify-content: center;
-  margin-top: 20px;
-
+  margin-top: 10px;
+  margin-bottom: 20px;
   span {
     color: white;
     padding-right: 15px;
