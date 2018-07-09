@@ -59,10 +59,14 @@
     .submit-btn,
     .add-btn {
       flex: 1;
-      padding: 12px;
+      padding: 12px 0px;
       border: none;
       color: #fff;
       font-size: 1.5rem;
+
+      &:focus {
+        outline: none;
+      }
     }
     .submit-btn {
       background: lightcoral;
