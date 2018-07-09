@@ -4,7 +4,7 @@ const addUser = user => {
   return Users.create(user);
 };
 
-const updateUser = async users => {
+const hhUpdate = async users => {
   users.forEach(async user => {
     await Users.update(
       {
@@ -20,6 +20,13 @@ const updateUser = async users => {
   });
   return users;
 };
+
+const updateUser = async (id, data) => {
+  console.log(id, data);
+  await Users.update(data, { where: { id: id } });
+  return;
+};
+
 const getUserByUsername = async username => {
   const user = await Users.findOne({
     where: { username },
@@ -50,5 +57,6 @@ module.exports = {
   getUserByUsername,
   getUserById,
   getAllUsers,
+  hhUpdate,
   updateUser
 };

@@ -19,10 +19,13 @@ import { NavComponent } from './components/nav/nav.component';
 import { PollListComponent } from './components/poll-list/poll-list.component';
 import { UpdateUserComponent } from './components/update-user/update-user.component';
 import { RandomGameComponent } from './components/random-game/random-game.component';
+import { AdminComponent } from './components/admin/admin.component';
+import { EditUserComponent } from './components/admin/edit-user/edit-user.component';
 
 // Services
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth.guard';
+import { AdminGuard } from './services/admin.guard';
 import { ToastService } from './services/toast.service';
 import { ApiService } from './services/api.service';
 import { GameService } from './services/game.service';
@@ -60,6 +63,11 @@ const appRoutes: Routes = [
     path: 'hh',
     component: UpdateUserComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'admin',
+    component: AdminComponent,
+    canActivate: [AuthGuard, AdminGuard]
   }
 ];
 
@@ -76,7 +84,9 @@ const appRoutes: Routes = [
     NavComponent,
     CreatePollComponent,
     UpdateUserComponent,
-    RandomGameComponent
+    RandomGameComponent,
+    AdminComponent,
+    EditUserComponent
   ],
   imports: [
     BrowserModule,
@@ -90,6 +100,7 @@ const appRoutes: Routes = [
   providers: [
     AuthService,
     AuthGuard,
+    AdminGuard,
     ToastService,
     ApiService,
     GameService,

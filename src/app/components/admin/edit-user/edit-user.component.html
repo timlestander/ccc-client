@@ -1,0 +1,34 @@
+<div class="edit-box" *ngIf="user">
+  <form [formGroup]="editForm" *ngIf="editForm" class="edit-form" (ngSubmit)="save(editForm.value)">
+    <div class="input-group">
+      <label>Namn</label>
+      <input type="text" formControlName="name" />
+    </div>
+    <div class="input-group">
+      <label>Användarnamn</label>
+      <input type="text" formControlName="username" />
+    </div>
+    <div class="input-group">
+      <label>OK</label>
+      <input type="number" formControlName="ok" />
+    </div>
+    <div class="input-group">
+      <label>Admin</label>
+      <select formControlName="admin">
+        <option [ngValue]=true>Ja</option>
+        <option [ngValue]=false>Nej</option>
+      </select>
+    </div>
+    <div class="input-group">
+      <label>HH</label>
+      <select formControlName="hh">
+        <option [ngValue]=true>Ja</option>
+        <option [ngValue]=false>Nej</option>
+      </select>
+    </div>
+    <div class="input-group">
+      <button type="submit" [disabled]="!editForm.valid">Spara</button>
+      <button type="button" (click)="closeEditor()">Avbryt</button>
+    </div>
+  </form>
+</div>

@@ -17,9 +17,17 @@ const getUserById = asyncErrorHandler(async (req, res, next) => {
   });
 });
 
-const updateUser = asyncErrorHandler(async (req, res, next) => {
+const hhUpdate = asyncErrorHandler(async (req, res, next) => {
   //TODO sanity check body
-  await userService.updateUser(req.body);
+  await userService.hhUpdate(req.body);
+  res.send({
+    success: true
+  });
+});
+
+const updateUser = asyncErrorHandler(async (req, res, next) => {
+  console.log(req.params.id, req.body);
+  await userService.updateUser(req.params.id, req.body);
   res.send({
     success: true
   });
@@ -28,5 +36,6 @@ const updateUser = asyncErrorHandler(async (req, res, next) => {
 module.exports = {
   getAllUsers,
   getUserById,
+  hhUpdate,
   updateUser
 };

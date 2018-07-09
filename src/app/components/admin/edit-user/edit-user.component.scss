@@ -1,0 +1,32 @@
+.edit-box {
+  width: 100%;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #fff;
+  padding-bottom: 15px;
+  form {
+    display: flex;
+    flex-wrap: wrap;
+    label {
+      display: block;
+    }
+
+    .input-group {
+      flex: 1 1 100px;
+      margin: 5px;
+
+      input {
+        min-width: 0px;
+        width: 100%;
+      }
+
+      select {
+        background: gray;
+      }
+
+      button {
+        padding: 4px 10px;
+        background: lightcoral;
+      }
+    }
+  }
+}

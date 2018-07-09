@@ -35,6 +35,10 @@ export class ApiService {
     return this.http.put(`${BASE_URL}/users`, users);
   }
 
+  public updateUser(id: number, data: any): Observable<any> {
+    return this.http.put(`${BASE_URL}/user/${id}`, data);
+  }
+
   public submitPoll(
     poll: PollInterface,
     options: OptionInterface[]

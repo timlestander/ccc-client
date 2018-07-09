@@ -1,0 +1,9 @@
+<div class="admin-wrapper">
+  <h1>Administration</h1>
+  <app-edit-user *ngIf="selectedUser" [user]="selectedUser" (close)="closeEdit()"></app-edit-user>
+  <div class="user-list" *ngIf="users">
+    <div class="user" *ngFor="let user of users" (click)="setSelectedUser(user)">
+      {{ user.name }} - {{ user.name }}
+    </div>
+  </div>
+</div>
