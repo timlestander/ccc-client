@@ -2,9 +2,9 @@
   <div class="members" *ngIf="users">
     <h1>Närvarande i rättegången</h1>
     <div class="executionSwitch">
-      <span>Gruppens sinnesstämmning: {{feeling ? 'SLAKTA' : 'PRISA' }}</span>
+      <span>Gruppens sinnesstämmning: {{ gameService.feeling ? 'SLAKTA' : 'PRISA' }}</span>
       <label class="switch">
-        <input type="checkbox" [checked]="feeling" (change)="feeling = !feeling">
+        <input type="checkbox" [checked]="feeling" (change)="gameService.feeling = !gameService.feeling">
         <span class="slider round"></span>
       </label>
     </div>

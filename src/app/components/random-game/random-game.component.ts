@@ -30,11 +30,12 @@ export class RandomGameComponent implements AfterViewInit, OnDestroy {
 
   @Input()
   public set elimination(value: boolean) {
+    console.log(value);
     this._elimination = value;
     if (value) {
       this.message = 'Bödeln väljer att skona:';
-      this.spinSpeed = 1;
-      this.numOfSpins = 1;
+      this.spinSpeed = 3;
+      this.numOfSpins = 2;
     }
   }
   public get elimination(): boolean {
