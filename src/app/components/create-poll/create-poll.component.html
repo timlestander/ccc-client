@@ -1,14 +1,19 @@
 <div class="create-wrapper">
   <h1>Skapa ärende</h1>
   <form [formGroup]="pollForm" (ngSubmit)="submitPoll(pollForm.value)">
-    <div class="formGroup">
+    <div class="question-section">
       <label>Ärendebeskrivning</label>
       <input type="text" formControlName="question">
     </div>
-    <div formArrayName="options">
+    <div formArrayName="options" class="answers">
       <label>Svar</label>
       <div *ngFor="let option of optionsFormArray.controls; let i=index" [formGroupName]="i">
-        <input type="text" formControlName="text">
+        <div class="answer-section">
+          <input type="text" formControlName="text">
+          <div class="delete">
+            <i class="far fa-trash-alt" (click)="deleteRow(i)"></i>
+          </div>
+        </div>
       </div>
     </div>
     <div class="buttons">

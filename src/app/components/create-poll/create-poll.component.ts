@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators'
+import { takeUntil } from 'rxjs/operators';
 import { ApiService } from '../../services/api.service';
 import { AuthService } from '../../services/auth.service';
 import { Validators, FormGroup, FormArray, FormControl } from '@angular/forms';
@@ -55,10 +55,10 @@ export class CreatePollComponent implements OnInit, OnDestroy {
       question: values.question,
       userId: this.authService.user.id
     };
-    this.apiService.submitPoll(pollData, optionsData)
-    .pipe(takeUntil(this.unsubscribe$))
-    .subscribe(
-      (response: any) => {
+    this.apiService
+      .submitPoll(pollData, optionsData)
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((response: any) => {
         if (response.success) {
           this.toastService.addToast(
             'success',
@@ -70,6 +70,11 @@ export class CreatePollComponent implements OnInit, OnDestroy {
           this.toastService.addDefaultError();
         }
       });
+  }
+
+  public deleteRow(index: number): void {
+    const control = (<FormArray>this.pollForm.controls['options']) as FormArray;
+    control.removeAt(index);
   }
 
   ngOnInit() {}
