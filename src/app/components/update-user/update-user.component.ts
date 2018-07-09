@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ApiService } from '../../services/api.service';
 import { ToastService } from '../../services/toast.service';
 import { UserInterface } from '../../interfaces/user.interface';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-update-user',
@@ -16,7 +17,8 @@ export class UpdateUserComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private router: Router,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private authService: AuthService
   ) {
     this.hhForm = new FormGroup({
       users: new FormArray([])
@@ -57,12 +59,25 @@ export class UpdateUserComponent implements OnInit {
   public onSubmit(value: any): void {
     let hhCounter: number = 0;
     value.users.forEach((user: any) => {
-      if (user.ok > 5) { user.ok = 5; }
-      if (user.ok < 1) { user.ok = 1; }
+      if (user.ok > 5) {
+        user.ok = 5;
+      }
+      if (user.ok < 1) {
+        user.ok = 1;
+      }
       if (user.hh) {
         hhCounter++;
       }
     });
+
+    if (!this.authService.user.hh) {
+      this.toastService.addToast(
+        'error',
+        'Upddateringen misslyckades',
+        'Du är inte HH. Tro inte att du kan komma här och göra massa saker.'
+      );
+      return;
+    }
 
     if (hhCounter === 1) {
       this.apiService.updateUsers(value.users).subscribe((response: any) => {
