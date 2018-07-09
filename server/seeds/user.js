@@ -7,7 +7,8 @@ module.exports = () => {
       name: 'Tim Lestander',
       username: 'tim',
       password: '$2a$04$cRf93fohCBmADnjhwKVAiO7Ei5MjPpPigJFbfzerm0eZJXN0teIMq',
-      hh: true
+      hh: true,
+      admin: true
     },
     {
       id: 101,

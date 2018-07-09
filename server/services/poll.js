@@ -1,6 +1,7 @@
 const Polls = require('../models').Poll;
 const Options = require('../models').Option;
 const Votes = require('../models').Vote;
+const Users = require('../models').User;
 
 const createPoll = async pollData => {
   const { poll, options } = pollData;
@@ -45,6 +46,9 @@ const getPollById = async id => {
             model: Votes
           }
         ]
+      },
+      {
+        model: Users
       }
     ]
   });

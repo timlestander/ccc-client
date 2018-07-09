@@ -24,7 +24,7 @@ const getUserByUsername = async username => {
   const user = await Users.findOne({
     where: { username },
     raw: true,
-    attributes: ['id', 'name', 'username', 'hh', 'ok', 'password']
+    attributes: ['id', 'name', 'username', 'hh', 'ok', 'password', 'admin']
   });
 
   return user;
@@ -34,7 +34,7 @@ const getUserById = async id => {
   const user = await Users.findOne({
     where: { id },
     raw: true,
-    attributes: ['id', 'name', 'username', 'hh', 'ok']
+    attributes: ['id', 'name', 'username', 'hh', 'ok', 'admin']
   });
 
   return user;

@@ -2,14 +2,13 @@
   width: 100%;
   box-sizing: border-box;
 
-  h1 {
-    text-align: center;
-    font-family: 'Roboto';
-    font-weight: 900;
-    font-size: 2.7rem;
+  .creator {
     color: #fff;
-    text-transform: uppercase;
-    margin-bottom: 20px;
+    font-size: 1.2rem;
+    text-align: center;
+    .name {
+      text-transform: uppercase;
+    }
   }
 
   h3 {
@@ -17,6 +16,7 @@
     text-transform: uppercase;
     font-family: 'Roboto', 'Arial';
     font-weight: 900;
+    font-size: 2.7rem;
     letter-spacing: 1px;
     color: #fff;
   }
