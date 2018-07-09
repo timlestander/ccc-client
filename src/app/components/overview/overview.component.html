@@ -8,7 +8,7 @@
         <span class="slider round"></span>
       </label>
     </div>
-    <div class="circle-container">
+    <div class="rotating-div">
       <div class="center-reference">
         <div *ngFor="let user of users; let i=index" class="user-entry" [ngStyle]="getPosition(i, users.length)">
           <img class="hh-image" *ngIf="user.hh" src="../../assets/hh.png" />
@@ -21,5 +21,9 @@
       </div>
     </div>
     <img class="bulgaria" src="../../assets/bulgaria-small.png" alt="Flag" (click)="flagClicked()">
+  </div>
+  <div class="address">
+    <h5>Till alla drägg</h5>
+    <p>Kupreška ulica 17 Split, Splitsko-dalmatinska županija 21000 Kroatien</p>
   </div>
 </div>

@@ -1,13 +1,13 @@
 .overview-wrapper {
   width: 100%;
-  height: 100%;
-  overflow: hidden;
-  padding-bottom: 50px;
+  overflow-x: hidden;
+  padding-bottom: 100px;
 
   .members {
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 500px;
 
     h1 {
       text-align: center;
@@ -19,7 +19,7 @@
       color: #fff;
     }
 
-    .circle-container {
+    .rotating-div {
       width: 260px;
       height: 260px;
       border-radius: 50%;
@@ -78,6 +78,18 @@
       margin-top: -150px;
       border-radius: 50%;
       z-index: 1;
+    }
+  }
+
+  .address {
+    margin-top: 40px;
+    color: #fff;
+    text-align: center;
+    font-family: 'Roboto';
+    text-transform: uppercase;
+    h5 {
+      font-size: 2.3rem;
+      font-weight: 900;
     }
   }
 }

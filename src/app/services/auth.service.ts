@@ -13,7 +13,6 @@ export const TOKEN_NAME: string = 'token';
 
 @Injectable()
 export class AuthService {
-  
   public user: UserInterface;
 
   constructor(private http: HttpClient, private router: Router) {
@@ -34,18 +33,26 @@ export class AuthService {
 
   public getTokenExpirationDate(token: string): number {
     const decoded = jwt_decode(token);
-    if (decoded.exp === undefined) { return null; }
+    if (decoded.exp === undefined) {
+      return null;
+    }
     const date = new Date(0);
     return date.setUTCSeconds(decoded.utc);
   }
 
   public isTokenExpired(token?: string) {
-    if (!token) { token = this.getToken(); }
-    if (!token) { return true; }
+    if (!token) {
+      token = this.getToken();
+    }
+    if (!token) {
+      return true;
+    }
 
     const date = this.getTokenExpirationDate(token);
-    if (date === undefined) { return true; }
-    return date.valueOf() > new Date().valueOf();
+    if (date === undefined) {
+      return true;
+    }
+    return date.valueOf() < new Date().valueOf();
   }
 
   public login(username: string, password: string): Observable<any> {
