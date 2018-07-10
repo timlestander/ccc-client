@@ -13,10 +13,6 @@ import { ToastService } from '../../services/toast.service';
   styleUrls: ['./poll.component.scss']
 })
 export class PollComponent implements OnInit {
-  @HostListener('window:resize')
-  public onResize(): void {
-    this.view = [window.innerWidth - 96, window.innerWidth - 120];
-  }
 
   public poll: PollInterface;
   public pollId: number;
@@ -116,5 +112,10 @@ export class PollComponent implements OnInit {
       });
     });
     return found;
+  }
+
+  @HostListener('window:resize')
+  public onResize(): void {
+    this.view = [window.innerWidth - 96, window.innerWidth - 120];
   }
 }

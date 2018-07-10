@@ -4,7 +4,7 @@
     <h4>Croation Crime Court</h4>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
       <div class="form-group">
-        <input type="text" formControlName="username" placeholder="Användarnamn" />
+        <input type="text" formControlName="username" placeholder="Användarnamn" autocapitalize="none />
       </div>
       <div class="form-group">
         <input type="password" formControlName="password" placeholder="Lösenord" />
