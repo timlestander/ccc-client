@@ -4,7 +4,7 @@
     <div class="executionSwitch">
       <span>Gruppens sinnesstämmning: {{ gameService.feeling ? 'SLAKTA' : 'PRISA' }}</span>
       <label class="switch">
-        <input type="checkbox" [checked]="feeling" (change)="gameService.feeling = !gameService.feeling">
+        <input type="checkbox" [checked]="gameService.feeling" (change)="gameService.feeling = !gameService.feeling">
         <span class="slider round"></span>
       </label>
     </div>

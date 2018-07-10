@@ -6,4 +6,5 @@ export interface PollInterface {
   userId: number;
   options?: OptionInterface[];
   totalVotes?: number;
+  user?: any;
 }

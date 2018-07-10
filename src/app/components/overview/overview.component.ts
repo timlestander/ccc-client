@@ -2,7 +2,7 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { Router } from '@angular/router';
 import { UserInterface } from '../../interfaces/user.interface';
-import { PollInterface } from '../../interfaces/poll.interface';
+// import { PollInterface } from '../../interfaces/poll.interface';
 import { GameService } from '../../services/game.service';
 import { ToastService } from '../../services/toast.service';
 
@@ -19,7 +19,7 @@ export class OverviewComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private router: Router,
-    private gameService: GameService,
+    public gameService: GameService,
     private toastService: ToastService
   ) {}
 
