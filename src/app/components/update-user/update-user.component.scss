@@ -75,6 +75,12 @@
     border: none;
     text-transform: uppercase;
     margin-top: 10px;
+
+    &:disabled,
+    &[disabled] {
+      text-decoration: line-through;
+      background: #999;
+    }
   }
 }
 

@@ -7,4 +7,12 @@
       <i class="far fa-trash-alt" (click)="deleteUser(user.id)"></i>
     </div>
   </div>
+
+  <h1>Hanter ärenden</h1>
+  <div class="poll-list">
+    <div class="poll" *ngFor="let poll of polls">
+      <span (click)="deletePoll(poll.id)">{{ poll.question }}</span>
+      <i class="far fa-trash-alt" (click)="deletePoll(poll.id)"></i>
+    </div>
+  </div>
 </div>

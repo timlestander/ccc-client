@@ -55,8 +55,18 @@ const getPollById = async id => {
   return poll;
 };
 
+const deletePoll = async id => {
+  const poll = await Polls.destroy({
+    where: {
+      id: id
+    }
+  });
+  return poll;
+};
+
 module.exports = {
   getAllPolls,
   getPollById,
-  createPoll
+  createPoll,
+  deletePoll
 };

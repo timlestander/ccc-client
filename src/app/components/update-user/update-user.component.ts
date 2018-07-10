@@ -59,6 +59,7 @@ export class UpdateUserComponent implements OnInit {
   public onSubmit(value: any): void {
     let hhCounter: number = 0;
     value.users.forEach((user: any) => {
+      user.ok = Math.floor(user.ok);
       if (user.ok > 5) {
         user.ok = 5;
       }
@@ -73,7 +74,7 @@ export class UpdateUserComponent implements OnInit {
     if (!this.authService.user.hh) {
       this.toastService.addToast(
         'error',
-        'Upddateringen misslyckades',
+        'Updateringen misslyckades',
         'Du är inte HH. Tro inte att du kan komma här och göra massa saker.'
       );
       return;

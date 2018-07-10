@@ -71,6 +71,12 @@
     .submit-btn {
       background: lightcoral;
       margin-right: 5px;
+
+      &:disabled,
+      &[disabled] {
+        text-decoration: line-through;
+        background: #999;
+      }
     }
     .add-btn {
       background: lightcoral;

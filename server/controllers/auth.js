@@ -26,7 +26,8 @@ const login = asyncErrorHandler(async (req, res, next) => {
       id: user.id,
       name: user.name,
       ok: user.ok,
-      hh: user.hh
+      hh: user.hh,
+      admin: user.admin
     };
 
     var token = jwt.sign(payload, config.jwtSecret, {
