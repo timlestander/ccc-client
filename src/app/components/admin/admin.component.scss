@@ -9,4 +9,29 @@
     font-size: 3rem;
     color: #fff;
   }
+
+  .user-list {
+    display: flex;
+    flex-direction: column;
+
+    .user {
+      display: flex;
+      padding: 10px;
+      background: #fff;
+      align-content: center;
+      margin-bottom: 10px;
+      border-radius: 3px;
+      span {
+        flex: 1;
+      }
+
+      i {
+        flex: 0 1 30px;
+        text-align: right;
+        font-size: 2rem;
+        color: lightcoral;
+        z-index: 10;
+      }
+    }
+  }
 }

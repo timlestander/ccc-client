@@ -52,11 +52,21 @@ const getAllUsers = async () => {
   return users;
 };
 
+const deleteUser = id => {
+  const user = Users.destroy({
+    where: {
+      id: id
+    }
+  });
+  return user;
+};
+
 module.exports = {
   addUser,
   getUserByUsername,
   getUserById,
   getAllUsers,
   hhUpdate,
-  updateUser
+  updateUser,
+  deleteUser
 };

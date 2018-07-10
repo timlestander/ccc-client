@@ -33,9 +33,17 @@ const updateUser = asyncErrorHandler(async (req, res, next) => {
   });
 });
 
+const deleteUser = asyncErrorHandler(async (req, res, next) => {
+  const user = await userService.deleteUser(req.params.id);
+  res.send({
+    success: true
+  });
+});
+
 module.exports = {
   getAllUsers,
   getUserById,
   hhUpdate,
-  updateUser
+  updateUser,
+  deleteUser
 };

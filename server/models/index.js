@@ -80,7 +80,7 @@ const Vote = sequelize.define('vote', {
 Poll.belongsTo(User);
 Poll.hasMany(Option);
 
-User.hasMany(Vote);
+User.hasMany(Vote, { onDelete: 'cascade' });
 Option.hasMany(Vote);
 
 module.exports = {
