@@ -26,4 +26,9 @@ module.exports.set = app => {
   );
   app.post('/api/vote', authMiddleware.checkAuth, voteController.submitVote);
   app.put('/api/user/:id', authMiddleware.checkAuth, userController.updateUser);
+  app.delete(
+    '/api/user/:id',
+    authMiddleware.checkAuth,
+    userController.deleteUser
+  );
 };
