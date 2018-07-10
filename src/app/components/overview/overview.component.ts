@@ -34,14 +34,15 @@ export class OverviewComponent implements OnInit {
   }
 
   public flagClicked(): void {
-    clearTimeout(this.clickTimer);
-    this.clicks++;
-    this.clickTimer = setTimeout(() => {
-      this.clicks = 0;
-    }, 300);
-    if (this.clicks === 3) {
-      this.gameService.setActive();
-    }
+    this.gameService.setActive();
+    // clearTimeout(this.clickTimer);
+    // this.clicks++;
+    // this.clickTimer = setTimeout(() => {
+    //   this.clicks = 0;
+    // }, 300);
+    // if (this.clicks === 3) {
+    //   this.gameService.setActive();
+    // }
   }
 
   public getPosition(item: number, length: number): Object {
