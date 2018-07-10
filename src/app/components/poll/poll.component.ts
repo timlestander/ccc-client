@@ -13,7 +13,6 @@ import { ToastService } from '../../services/toast.service';
   styleUrls: ['./poll.component.scss']
 })
 export class PollComponent implements OnInit {
-
   public poll: PollInterface;
   public pollId: number;
   public hasVoted: boolean;
@@ -24,7 +23,7 @@ export class PollComponent implements OnInit {
   autoScale = false;
   showLegend = false;
   showLabels = false;
-  explodeSlices = true;
+  explodeSlices = false;
   doughnut = false;
   colorScheme = {
     domain: [
@@ -65,6 +64,10 @@ export class PollComponent implements OnInit {
         this.toastService.addDefaultError();
       }
     });
+  }
+
+  public refreshData(): void {
+    this.fetchData(this.pollId);
   }
 
   public submitVote(option: OptionInterface): void {

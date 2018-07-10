@@ -15,6 +15,7 @@
     <p class="creator">Ärende skapat av:
       <span class="name" *ngIf="poll.user">{{ poll.user.name }}</span>
       <span class="name" *ngIf="!poll.user">Dödens död</span>
+      <i class="fas fa-sync-alt refresh" (click)="refreshData()"></i>
     </p>
     <div class="chart-labels">
       <div class="label" *ngFor="let option of graphData; let i=index">

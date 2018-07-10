@@ -2,15 +2,6 @@
   width: 100%;
   box-sizing: border-box;
 
-  .creator {
-    color: #fff;
-    font-size: 1.2rem;
-    text-align: center;
-    .name {
-      text-transform: uppercase;
-    }
-  }
-
   h3 {
     text-align: center;
     text-transform: uppercase;
@@ -80,5 +71,18 @@
     .chart-container {
       width: 80vw;
     }
+  }
+}
+
+.creator {
+  color: #fff;
+  font-size: 1.2rem;
+  text-align: center;
+  .name {
+    text-transform: uppercase;
+  }
+  .refresh {
+    font-size: 2.5rem;
+    margin-left: 20px;
   }
 }
