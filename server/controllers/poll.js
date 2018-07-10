@@ -25,8 +25,16 @@ const getPollById = asyncErrorHandler(async (req, res, next) => {
   });
 });
 
+const deletePoll = asyncErrorHandler(async (req, res, next) => {
+  const poll = await pollService.deletePoll(req.params.id);
+  res.send({
+    success: true
+  });
+});
+
 module.exports = {
   getAllPolls,
   getPollById,
-  createPoll
+  createPoll,
+  deletePoll
 };

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { UserInterface } from '../../interfaces/user.interface';
+import { PollInterface } from '../../interfaces/poll.interface';
 import { ToastService } from '../../services/toast.service';
 
 @Component({
@@ -15,11 +16,16 @@ export class AdminComponent implements OnInit {
   ) {}
 
   public users: UserInterface[];
+  public polls: PollInterface[];
   public selectedUser: UserInterface;
 
   ngOnInit() {
     this.apiService.getAllUsers().subscribe((response: any) => {
       this.users = response.data;
+    });
+
+    this.apiService.getAllPolls().subscribe((response: any) => {
+      this.polls = response.data;
     });
   }
 
@@ -33,7 +39,6 @@ export class AdminComponent implements OnInit {
   }
 
   public deleteUser(id: number): void {
-    event.preventDefault();
     this.apiService.deleteUser(id).subscribe((response: any) => {
       if (response.success) {
         this.toastService.addToast(
@@ -44,6 +49,29 @@ export class AdminComponent implements OnInit {
         this.users.forEach((user: UserInterface, i: number) => {
           if (user.id === id) {
             this.users.splice(i, 1);
+          }
+        });
+      } else {
+        this.toastService.addToast(
+          'error',
+          'Borttagning misslyckades',
+          'Något gick fel. Försök igen'
+        );
+      }
+    });
+  }
+
+  public deletePoll(id: number): void {
+    this.apiService.deletePoll(id).subscribe((response: any) => {
+      if (response.success) {
+        this.toastService.addToast(
+          'success',
+          'Borttagning lyckades',
+          'Ärendet är nu borttaget'
+        );
+        this.polls.forEach((poll: PollInterface, i: number) => {
+          if (poll.id === id) {
+            this.polls.splice(i, 1);
           }
         });
       } else {

@@ -43,6 +43,10 @@ export class ApiService {
     return this.http.delete(`${BASE_URL}/user/${id}`);
   }
 
+  public deletePoll(id: number): Observable<any> {
+    return this.http.delete(`${BASE_URL}/poll/${id}`);
+  }
+
   public submitPoll(
     poll: PollInterface,
     options: OptionInterface[]

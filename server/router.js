@@ -31,4 +31,9 @@ module.exports.set = app => {
     authMiddleware.checkAuth,
     userController.deleteUser
   );
+  app.delete(
+    '/api/poll/:id',
+    authMiddleware.checkAuth,
+    pollController.deletePoll
+  );
 };
