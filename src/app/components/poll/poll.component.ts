@@ -73,12 +73,11 @@ export class PollComponent implements OnInit {
   public submitVote(option: OptionInterface): void {
     const values: VoteInterface = {
       userId: this.authService.user.id,
-      optionId: option.id,
-      ok: this.authService.user.ok
+      optionId: option.id
     };
     this.apiService.submitVote(values).subscribe((response: any) => {
       if (response.success) {
-        this.fetchData(this.pollId);
+        this.refreshData();
       } else {
         this.toastService.addDefaultError();
       }
