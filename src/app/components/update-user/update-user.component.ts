@@ -85,9 +85,9 @@ export class UpdateUserComponent implements OnInit {
           this.toastService.addToast(
             'success',
             'Uppdateringen lyckades',
-            'Allt gick bra och någon annan är nu HH. Bara att kämpa på så kanske du blir HH imorgon på nytt'
+            'Allt gick bra och någon annan är nu HH. Du loggades ut för du behöver logga in och refresha din token så du inte kan fuska med dina HH-rättigheter.'
           );
-          this.router.navigateByUrl('/');
+          this.authService.logout();
         } else {
           this.toastService.addToast(
             'error',
