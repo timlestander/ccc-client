@@ -1,8 +1,9 @@
 <div class="vote-wrapper">
   <div *ngIf="poll && !hasVoted" class="question-wrapper">
     <h3>{{ poll.question }}</h3>
-    <p class="creator">Ärende skapat av:
-      <span class="name">{{ poll.user.name }}</span>
+    <p class="creator">Ärende skapat av: {{ poll | json}}
+      <span class="name" *ngIf="poll.user">{{ poll.user.name }}</span>
+      <span class="name" *ngIf="!poll.user">Dödens död</span>
     </p>
     <div class="option" *ngFor="let option of poll.options" (click)="submitVote(option)">
       {{ option.text }}
@@ -12,7 +13,8 @@
   <div class="result-wrapper" *ngIf="graphData.length > 0 && poll && hasVoted">
     <h3>{{ poll.question }} </h3>
     <p class="creator">Ärende skapat av:
-      <span class="name">{{ poll.user.name }}</span>
+      <span class="name" *ngIf="poll.user">{{ poll.user.name }}</span>
+      <span class="name" *ngIf="!poll.user">Dödens död</span>
     </p>
     <div class="chart-labels">
       <div class="label" *ngFor="let option of graphData; let i=index">
